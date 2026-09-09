@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SilverFox Website
 
-## Getting Started
+The production SilverFox corporate website: Next.js App Router, TypeScript and Tailwind CSS v4, built static-first with no database, no authentication and no CMS.
 
-First, run the development server:
+## Handoff documents
+
+The canonical requirements this build implements live in [`docs/`](docs/):
+
+- [`SILVERFOX_WEBSITE_CANONICAL.md`](docs/SILVERFOX_WEBSITE_CANONICAL.md) — sitemap, page copy, CTA wording, navigation, footer, launch exclusions.
+- [`SILVERFOX_WEBSITE_PRESENTATION_SPEC.md`](docs/SILVERFOX_WEBSITE_PRESENTATION_SPEC.md) — art direction, layout, colour, typography, motion.
+- [`SilverFox_Technical_Instructions.md`](docs/SilverFox_Technical_Instructions.md) — architecture, security, accessibility, performance, deployment.
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in what you have; everything else falls back to a placeholder
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev      # local development (Turbopack)
+npm run build    # production build
+npm run start    # serve the production build locally
+npm run lint     # ESLint
+npx tsc --noEmit # TypeScript check
+```
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+app/                    Routes (App Router) - one folder per URL
+components/
+  brand/                The adaptive mark and logo lockup
+  layout/                Header, mega-menus, mobile nav, footer
+  sections/              Shared section building blocks (hero, chapter rail,
+                          content blocks, product/service page pieces)
+  home/                  Homepage-only composition and motion pieces
+  forms/                 Contact form and Turnstile widget
+  ui/                    CtaLink, Section, IncidentResponseCta
+content/                 All page copy as typed TypeScript data, transcribed
+                          verbatim from docs/SILVERFOX_WEBSITE_CANONICAL.md
+lib/                     Zod schema, rate limiting, email, Turnstile
+                          verification, structured data, shared types
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Content is deliberately separated from presentation: to edit copy, change the
+relevant file under `content/`, never the JSX in `app/` or `components/`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Configuration and placeholders
 
-## Deploy on Vercel
+All business, contact and legal details are centralised in
+[`content/site.ts`](content/site.ts) and sourced from environment variables,
+falling back to a clearly bracketed placeholder (e.g. `[FULL LEGAL ENTITY
+NAME]`) when unset. See [`.env.example`](.env.example) for the full list.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The incident-response CTA only links to a real destination once
+`INCIDENT_RESPONSE_HREF` is set; until then it falls back to a working
+`mailto:` link to the general contact address rather than a dead link.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact form
+
+`POST /api/contact` ([`app/api/contact/route.ts`](app/api/contact/route.ts))
+validates with Zod, checks a honeypot field, applies a best-effort in-memory
+rate limit, verifies Cloudflare Turnstile (skipped with a logged warning if
+not configured) and sends via Resend (logged instead of sent if not
+configured). None of this blocks the production build or local development
+when credentials are missing - see `.env.example`.
+
+## Security
+
+- Strict `Content-Security-Policy` with no `unsafe-inline` for scripts or
+  styles (see [`next.config.ts`](next.config.ts)). The one inline script -
+  the homepage's Organization JSON-LD - is allowed via a SHA-256 hash, not a
+  blanket exception.
+- HSTS, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` and a
+  restrictive `Permissions-Policy` are set on every route.
+- No secrets are ever exposed to the client; only
+  `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `NEXT_PUBLIC_SITE_URL` use the
+  `NEXT_PUBLIC_` prefix, and both are meant to be public.
+
+## Deployment
+
+Deploys natively to Vercel with no extra configuration. Set the environment
+variables from `.env.example` in the Vercel project settings for Preview and
+Production before going live.

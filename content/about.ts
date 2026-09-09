@@ -1,0 +1,138 @@
+export const aboutContent = {
+  hero: {
+    heading: "Built to challenge assumptions.",
+    paragraphs: [
+      "SilverFox is a cybersecurity services and technology company focused on helping organisations understand risk, expose weaknesses, strengthen systems and respond decisively when security is tested.",
+      "We work across the attack lifecycle, from strategy and assurance to offensive security, cloud and application security, identity protection, managed cyber defence and incident response.",
+    ],
+    statement: "Our approach is built around a simple principle:",
+    principle: "Security should be demonstrated, not assumed.",
+  },
+  connectedProblem: {
+    heading: "Cybersecurity is a connected problem.",
+    paragraphs: [
+      "Attackers do not see separate departments for cloud, identity, applications, networks and data.",
+      "They see opportunities.",
+      "A vulnerable application can expose an identity.",
+      "A compromised identity can unlock infrastructure.",
+      "A weak configuration can create lateral movement.",
+      "An overlooked service can become an entry point.",
+      "SilverFox works across those boundaries.",
+      "We combine offensive thinking, defensive operations and security engineering so that weaknesses identified in one part of the environment can improve the rest.",
+    ],
+  },
+  chapters: [
+    {
+      id: "offensive-insight",
+      heading: "Offensive insight.",
+      paragraphs: [
+        "Understanding how attackers think changes how security is designed.",
+        "Our offensive-security work looks beyond individual vulnerabilities to understand exploitation, privilege, lateral movement, attack paths and realistic impact.",
+        "Findings should improve more than the next penetration-test report.",
+        "They should improve architecture, identity controls, monitoring and response.",
+      ],
+    },
+    {
+      id: "defensive-discipline",
+      heading: "Defensive discipline.",
+      paragraphs: [
+        "Defence is not simply collecting more security telemetry.",
+        "It is knowing what matters.",
+        "SilverFox helps organisations build and operate security capabilities around:",
+      ],
+      list: [
+        "meaningful detection",
+        "threat context",
+        "investigation",
+        "threat hunting",
+        "incident escalation",
+        "containment",
+        "continuous improvement",
+      ],
+      footnote: ["The objective is not more alerts.", "It is better security decisions."],
+    },
+    {
+      id: "engineering-depth",
+      heading: "Engineering depth.",
+      paragraphs: [
+        "Finding the weakness is often only the beginning.",
+        "SilverFox can support the engineering required to close it.",
+        "That may involve:",
+      ],
+      list: [
+        "redesigning architecture",
+        "hardening infrastructure",
+        "improving identity controls",
+        "integrating security platforms",
+        "automating security workflows",
+        "developing specialised software",
+        "building new security technology",
+      ],
+      footnote: [
+        "Where conventional solutions are appropriate, we use them.",
+        "Where they are insufficient, we engineer around the problem.",
+      ],
+    },
+  ],
+  approach: [
+    { step: "01", title: "Understand", body: "Build an accurate picture of the organisation, its technology and the risks that matter." },
+    { step: "02", title: "Challenge", body: "Test assumptions through technical assessment and adversarial thinking." },
+    { step: "03", title: "Engineer", body: "Design and implement controls that reduce meaningful exposure." },
+    { step: "04", title: "Defend", body: "Monitor, detect and investigate activity across the environment." },
+    { step: "05", title: "Respond", body: "Contain incidents, establish evidence and restore control." },
+    { step: "06", title: "Improve", body: "Turn assessment findings, attack simulations and incident evidence into stronger security." },
+  ],
+  technology: {
+    heading: "Technology as an extension of expertise.",
+    paragraphs: [
+      "SilverFox develops technology around security problems encountered in practice.",
+      "Our current technology portfolio focuses on three areas:",
+    ],
+    products: [
+      { id: "SCOPE", body: "Continuous exposure and attack-surface intelligence.", signature: "Know the exposure." },
+      { id: "SIGNAL", body: "Security operations and threat intelligence.", signature: "Read the signal." },
+      { id: "RANGE", body: "Cyber simulation and security validation.", signature: "Prove the defence." },
+    ],
+    together: "Know the exposure. Read the signal. Prove the defence.",
+    cta: "Explore SilverFox Technologies",
+  },
+  builtWhenNecessary: {
+    heading: "Built when necessary.",
+    paragraphs: ["Some security requirements do not fit neatly inside an existing product."],
+    list: [
+      "secure software engineering",
+      "cybersecurity product development",
+      "automation",
+      "AI and machine learning",
+      "computer vision",
+      "edge computing",
+      "embedded systems",
+      "data and intelligence platforms",
+      "rapid prototyping",
+      "applied security research",
+    ],
+    footnote: ["These capabilities support the cybersecurity mission.", "They do not replace it."],
+    cta: "Explore Engineering & Applied R&D",
+  },
+  howWeThink: {
+    heading: "How we think.",
+    principles: [
+      { heading: "Evidence over assumption.", body: "Confidence should come from what can be demonstrated." },
+      { heading: "Context over volume.", body: "More findings, alerts and data do not automatically create better security." },
+      { heading: "Paths over silos.", body: "Individual weaknesses matter most when they combine." },
+      { heading: "Engineering over theatre.", body: "Security should improve the environment, not just the presentation." },
+      { heading: "Clarity under pressure.", body: "Technical depth should make decisions easier." },
+    ],
+  },
+  principle: {
+    lineOne: "We do not sell fear.",
+    lineTwo: "We engineer confidence.",
+    paragraphs: [
+      "Security should be understandable.",
+      "Defences should be tested.",
+      "Incidents should be investigated with evidence.",
+      "And technology should solve the problem it was introduced to solve.",
+    ],
+    cta: "Talk to SilverFox",
+  },
+};
