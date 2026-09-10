@@ -41,11 +41,10 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-[2fr_1fr_1fr_1fr] lg:col-span-3">
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-[2fr_1fr_1fr] lg:col-span-3">
             <FooterColumn title="Services" links={footerNav.services} />
             <FooterColumn title="Technologies" links={footerNav.technologies} />
-            <FooterColumn title="Company" links={footerNav.company} />
-            <FooterColumn title="Legal" links={footerNav.legal} />
+            <FooterColumn title="Company" links={[...footerNav.company, ...footerNav.legal]} />
           </div>
         </div>
 

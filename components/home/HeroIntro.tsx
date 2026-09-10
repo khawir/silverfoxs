@@ -77,14 +77,14 @@ export function HeroIntro({
           headingEl.classList.remove("typing-caret");
 
           paraWrap.classList.remove("hero-intro-hidden");
-          const fadeSettled = setTimeout(() => {
+          const punchlineDelay = setTimeout(() => {
             punchWrap.classList.add("type-out-active");
             typeInto(punchText, punchline, 55, () => {
               punchWrap.classList.remove("type-out-active");
               sweepRef.current?.classList.add("motion-sweep");
             });
-          }, 480);
-          timers.push(fadeSettled);
+          }, 1000);
+          timers.push(punchlineDelay);
         });
       },
       { threshold: 0.6 }
