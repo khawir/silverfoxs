@@ -32,8 +32,8 @@ export default function HomePage() {
           </Reveal>
           <Reveal delayClass="delay-150" className="lg:col-span-7">
             <p className="text-lead text-slate-650">{content.hero.paragraphs[0]}</p>
-            <p className="mt-3 text-lead font-bold uppercase tracking-[0.03em] text-ink-950">
-              <TypeOut text={content.hero.paragraphs[1]} />
+            <p className="mt-3 text-lead font-bold italic uppercase tracking-[0.08em] text-ink-950">
+              <TypeOut text={content.hero.paragraphs[1]} startDelayMs={500} sweepOnComplete />
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <CtaLink href={contactHref()} variant="primary">
