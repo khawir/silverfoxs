@@ -5,6 +5,7 @@ import { CapabilityGrid } from "@/components/home/CapabilityGrid";
 import { KineticSwap } from "@/components/home/KineticSwap";
 import { TechnologyPanel } from "@/components/home/TechnologyPanel";
 import { Reveal } from "@/components/motion/Reveal";
+import { TypeOut } from "@/components/motion/TypeOut";
 import { LifecycleScroll } from "@/components/sections/LifecycleScroll";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { Section } from "@/components/ui/Section";
@@ -30,11 +31,10 @@ export default function HomePage() {
             <h1 className="text-display-xl">{content.hero.heading}</h1>
           </Reveal>
           <Reveal delayClass="delay-150" className="lg:col-span-7">
-            {content.hero.paragraphs.map((p, i) => (
-              <p key={i} className={`text-lead text-slate-650 ${i > 0 ? "mt-1" : ""}`}>
-                {p}
-              </p>
-            ))}
+            <p className="text-lead text-slate-650">{content.hero.paragraphs[0]}</p>
+            <p className="mt-3 text-lead font-bold uppercase tracking-[0.03em] text-ink-950">
+              <TypeOut text={content.hero.paragraphs[1]} />
+            </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <CtaLink href={contactHref()} variant="primary">
                 {globalCta.talkToSpecialist}

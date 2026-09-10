@@ -283,6 +283,36 @@ button {
   to { transform: translateX(120%); opacity: 0; }
 }
 
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* TypeOut: dim while actively typing, resolving to full contrast once
+   complete - the same uncertainty-to-clarity language as the brand
+   statement's resolve, here tied to the typing finishing rather than a
+   separate reveal. A caret only appears while actively typing (class
+   toggled in JS), never as a static leftover once the text is revealed. */
+.type-out {
+  opacity: 1;
+  transition: opacity 0.3s var(--ease-out-crisp);
+}
+
+.type-out-active {
+  opacity: 0.5;
+}
+
+.type-out-active::after {
+  content: "";
+  display: inline-block;
+  width: 0.09em;
+  height: 0.9em;
+  margin-left: 0.08em;
+  vertical-align: -0.1em;
+  background: currentColor;
+  animation: caret-blink 0.9s step-end infinite;
+}
+
 .motion-sweep {
   animation: sweep-once 1.1s var(--ease-out-crisp) both;
 }
