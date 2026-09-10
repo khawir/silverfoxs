@@ -34,11 +34,11 @@ export default function HomePage() {
             headingClassName="lg:col-span-8"
             bodyClassName="lg:col-span-7"
           >
-            <div className="mt-8 flex flex-wrap gap-4">
-              <CtaLink href={contactHref()} variant="primary" className="sm:w-72 sm:justify-center">
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+              <CtaLink href={contactHref()} variant="primary" className="w-full justify-center sm:w-72">
                 {globalCta.talkToSpecialist}
               </CtaLink>
-              <CtaLink href="/services" variant="ghost-on-light" className="sm:w-72 sm:justify-center">
+              <CtaLink href="/services" variant="ghost-on-light" className="w-full justify-center sm:w-72">
                 {globalCta.exploreCapabilities}
               </CtaLink>
             </div>
