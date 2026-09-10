@@ -1,15 +1,22 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
+
+// useLayoutEffect warns when it runs during server rendering (it never
+// actually executes there). This component is only ever mounted in the
+// browser after hydration, so alias to a no-op-on-server equivalent.
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /**
  * Types its text out character by character, once, on scroll entry - the
  * same IntersectionObserver + reduced-motion convention as Reveal and
  * KineticSwap. The full text is always present in the initial markup (SSR,
- * no-JS, reduced-motion), so nothing is ever hidden behind the animation;
- * JS only clears and retypes it as a bonus. Text is mutated via
- * `textContent`, and the post-type flash via `classList`, never a `style`
- * prop, so it stays clear of this site's style-src CSP.
+ * no-JS, reduced-motion), so nothing is ever hidden behind the animation for
+ * those cases. For everyone else, a layout effect (runs before the browser
+ * paints, unlike a regular effect) blanks it immediately so there is no
+ * flash of the full text before it clears and starts typing. JS only ever
+ * mutates `textContent` and toggles `classList`, never a `style` prop, so it
+ * stays clear of this site's style-src CSP.
  */
 export function TypeOut({
   text,
@@ -28,13 +35,17 @@ export function TypeOut({
   const targetRef = useRef<HTMLSpanElement>(null);
   const sweepRef = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const wrap = wrapRef.current;
     const target = targetRef.current;
     if (!wrap || !target) return;
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) return;
+
+    // Blank it before the browser ever paints the full SSR text, so the
+    // delay that follows is genuinely a pause before anything appears.
+    target.textContent = "";
 
     let intervalId: ReturnType<typeof setInterval> | undefined;
     let startTimeoutId: ReturnType<typeof setTimeout> | undefined;
