@@ -109,7 +109,7 @@ export function HeroIntro({
       );
       if (cancelled) return;
 
-      await animate(0, 0, { duration: 1 });
+      await animate(0, 0, { duration: 2 });
       if (cancelled) return;
 
       punchWrap.classList.add("type-out-active");

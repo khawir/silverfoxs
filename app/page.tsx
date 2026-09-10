@@ -35,10 +35,10 @@ export default function HomePage() {
             bodyClassName="lg:col-span-7"
           >
             <div className="mt-8 flex flex-wrap gap-4">
-              <CtaLink href={contactHref()} variant="primary">
+              <CtaLink href={contactHref()} variant="primary" className="sm:w-72 sm:justify-center">
                 {globalCta.talkToSpecialist}
               </CtaLink>
-              <CtaLink href="/services" variant="ghost-on-light">
+              <CtaLink href="/services" variant="ghost-on-light" className="sm:w-72 sm:justify-center">
                 {globalCta.exploreCapabilities}
               </CtaLink>
             </div>
