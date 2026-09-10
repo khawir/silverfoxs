@@ -1,18 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+
+const emptySubscribe = () => () => {};
+
+/** True only once mounted on the client - lets us defer `createPortal` past SSR without an effect-driven setState. */
+function useMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
 import { Logo } from "@/components/brand/Logo";
 import { engineeringNav, globalCta, primaryNav, productsNav, servicesNav } from "@/content/site";
 
 /**
- * The mobile navigation drawer. Deliberately self-contained (own header row,
- * own close control, own focus management) rather than relying on the
- * desktop header staying visible underneath it - docs/UPDATE.md section 16.
+ * The mobile navigation drawer.
+ *
+ * Rendered via a portal directly into `document.body` rather than in place
+ * inside `<header>`. The header has `backdrop-blur-sm` (a `backdrop-filter`),
+ * and in every major browser `filter`/`backdrop-filter` establish a new
+ * containing block for `position: fixed` descendants - so a `fixed inset-0`
+ * panel nested inside the header would size itself against the header's own
+ * ~80px box, not the viewport, silently breaking the "full-screen overlay"
+ * regardless of how the panel itself is built. Portaling to `document.body`
+ * removes the dependency on the header's styling entirely.
  */
 export function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [technologiesOpen, setTechnologiesOpen] = useState(false);
+  const mounted = useMounted();
   const panelRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -53,17 +73,17 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
+      id="mobile-navigation"
       ref={panelRef}
       role="dialog"
       aria-modal="true"
       aria-label="Site navigation"
-      className="fixed inset-0 z-50 flex flex-col bg-ink-950 text-bone-050 md:hidden"
+      className="fixed inset-0 z-[100] flex flex-col bg-ink-950 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] text-bone-050 md:hidden"
       data-surface="ink"
-      style={{ paddingTop: "env(safe-area-inset-top)", paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <div className="shell flex h-16 shrink-0 items-center justify-between border-b border-line-dark">
         <Logo />
@@ -180,6 +200,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
           {globalCta.talkToSpecialist}
         </Link>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

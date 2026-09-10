@@ -124,7 +124,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <CtaLink href="/contact" size="sm" className="hidden lg:inline-flex">
+          <CtaLink href="/contact" size="sm" className="max-lg:hidden">
             {globalCta.talkToSpecialist}
           </CtaLink>
           <button
@@ -167,15 +167,13 @@ export function SiteHeader() {
         </div>
       )}
 
-      <div id="mobile-navigation">
-        <MobileNav
-          open={mobileOpen}
-          onClose={() => {
-            setMobileOpen(false);
-            mobileToggleRef.current?.focus();
-          }}
-        />
-      </div>
+      <MobileNav
+        open={mobileOpen}
+        onClose={() => {
+          setMobileOpen(false);
+          mobileToggleRef.current?.focus();
+        }}
+      />
     </header>
   );
 }

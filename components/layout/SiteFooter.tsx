@@ -34,7 +34,7 @@ export function SiteFooter() {
               aria-hidden="true"
               className="pointer-events-none absolute -left-10 -top-16 h-64 w-64 text-graphite-800 md:h-80 md:w-80"
             />
-            <p className="relative text-display text-bone-050">{siteConfig.tagline}</p>
+            <p className="relative text-footer-statement text-bone-050">{siteConfig.tagline}</p>
             <p className="relative mt-6 max-w-[46ch] text-body text-line-light">
               {siteConfig.description}
             </p>

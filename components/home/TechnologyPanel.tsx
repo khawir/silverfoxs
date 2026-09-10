@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useReducedMotion } from "@/components/motion/useReducedMotion";
 import type { ProductAccent } from "@/lib/types";
 
 const accentBg: Record<ProductAccent, string> = {
@@ -24,8 +27,35 @@ type TechnologyProduct = {
  * docs/UPDATE.md section 9.
  */
 export function TechnologyPanel({ products }: { products: TechnologyProduct[] }) {
+  const reducedMotion = useReducedMotion();
+
   return (
-    <div className="grid grid-cols-1 gap-px overflow-hidden border border-line-dark bg-line-dark sm:grid-cols-3">
+    <div>
+      {/* The three products as one connected system: a signal travels
+          SCOPE -> SIGNAL -> RANGE, echoing KNOW -> DETECT -> VALIDATE. SMIL
+          animateMotion, not CSS offset-path, which does not reliably track
+          SVG geometry in every engine. */}
+      <svg viewBox="0 0 300 16" aria-hidden="true" className="mb-4 hidden h-4 w-full sm:block">
+        <line x1={50} y1={8} x2={250} y2={8} stroke="var(--color-line-dark)" strokeWidth={1} />
+        {[50, 150, 250].map((x) => (
+          <circle key={x} cx={x} cy={8} r={2.5} fill="var(--color-line-dark)" />
+        ))}
+        {!reducedMotion && (
+          <circle r={3.5} fill="var(--color-flare)" opacity={0}>
+            <animateMotion path="M50 8 L250 8" dur="3.2s" repeatCount="indefinite" fill="freeze" />
+            <animate
+              attributeName="opacity"
+              keyTimes="0;0.08;0.92;1"
+              values="0;1;1;0"
+              dur="3.2s"
+              repeatCount="indefinite"
+              fill="freeze"
+            />
+          </circle>
+        )}
+      </svg>
+
+      <div className="grid grid-cols-1 gap-px overflow-hidden border border-line-dark bg-line-dark sm:grid-cols-3">
       {products.map((product) => (
         <Link
           key={product.id}
@@ -43,6 +73,7 @@ export function TechnologyPanel({ products }: { products: TechnologyProduct[] })
           </span>
         </Link>
       ))}
+      </div>
     </div>
   );
 }

@@ -40,6 +40,8 @@ export const homeContent = {
       { verb: "Watch the environment.", body: "Detect meaningful activity before alerts disappear into noise." },
       { verb: "Respond with evidence.", body: "Contain incidents, establish what happened and regain control." },
     ],
+    /** Short technical labels for the lifecycle scroll section's parallel attack-path track - one per stage. */
+    chain: ["Vulnerable Application", "Identity", "Cloud", "Privileged Access", "Critical Asset"],
   },
   engineering: {
     heading: "When the right solution does not exist, build it.",
@@ -74,16 +76,10 @@ export const homeContent = {
       },
     ],
   },
-  whySilverFox: {
-    kicker: "We do not sell fear. We engineer confidence.",
-    items: [
-      { heading: "Offensive insight.", body: "Understanding security from the attacker's perspective changes how defences are designed." },
-      { heading: "Defensive discipline.", body: "Detection and response require engineering, context and operational consistency." },
-      { heading: "Engineering depth.", body: "Finding the problem is not enough. SilverFox can help design, integrate and build the solution." },
-      { heading: "Connected thinking.", body: "Cloud, identity, applications, infrastructure and data are not independent attack surfaces. Neither is our approach." },
-      { heading: "Evidence over assumption.", body: "We test what can be tested, investigate what happened and explain what the evidence supports." },
-      { heading: "Technology without dependency.", body: "We work across technology ecosystems and develop specialised capability where standard platforms are not enough." },
-    ],
+  brandStatement: {
+    lineOne: "We do not sell fear.",
+    lineTwo: "We engineer confidence.",
+    supporting: "Offensive insight, defensive discipline and engineering depth, connected by evidence.",
   },
   finalCta: {
     heading: "What would an attacker find?",
