@@ -17,7 +17,16 @@ const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffec
  * effect blanks it before first paint for everyone else, so there's no
  * flash of the finished state before the sequence plays. Every mutation is
  * `textContent`/`classList`, never a `style` prop, to stay clear of this
- * site's style-src CSP.
+ * site's style-src CSP (a ref's own `.style.setProperty` is a separate,
+ * unrestricted CSSOM path - only React's `style` prop gets serialised into
+ * a blocked inline `style=""` attribute during SSR).
+ *
+ * The headline and punchline both have their final rendered height
+ * measured and reserved via min-height before their text is cleared, and
+ * released once each finishes typing. Without this, typing the headline
+ * out character by character lets it wrap from one line to two partway
+ * through, growing the hero (and pushing everything below it down) mid
+ * animation - exactly the kind of layout shift this pins in place instead.
  */
 export function HeroIntro({
   heading,
@@ -36,6 +45,7 @@ export function HeroIntro({
 }) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const paraWrapRef = useRef<HTMLDivElement>(null);
+  const punchLineRef = useRef<HTMLParagraphElement>(null);
   const punchWrapRef = useRef<HTMLSpanElement>(null);
   const punchTextRef = useRef<HTMLSpanElement>(null);
   const sweepRef = useRef<HTMLSpanElement>(null);
@@ -43,11 +53,17 @@ export function HeroIntro({
   useIsomorphicLayoutEffect(() => {
     const headingEl = headingRef.current;
     const paraWrap = paraWrapRef.current;
+    const punchLine = punchLineRef.current;
     const punchWrap = punchWrapRef.current;
     const punchText = punchTextRef.current;
-    if (!headingEl || !paraWrap || !punchWrap || !punchText) return;
+    if (!headingEl || !paraWrap || !punchLine || !punchWrap || !punchText) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Pin each line's current (fully-typed) rendered height before clearing
+    // its text, so the hero's total height never changes mid-animation.
+    headingEl.style.setProperty("min-height", `${headingEl.getBoundingClientRect().height}px`);
+    punchLine.style.setProperty("min-height", `${punchLine.getBoundingClientRect().height}px`);
 
     headingEl.textContent = "";
     paraWrap.classList.add("hero-intro-hidden");
@@ -75,12 +91,14 @@ export function HeroIntro({
         headingEl.classList.add("typing-caret");
         typeInto(headingEl, heading, 28, () => {
           headingEl.classList.remove("typing-caret");
+          headingEl.style.removeProperty("min-height");
 
           paraWrap.classList.remove("hero-intro-hidden");
           const punchlineDelay = setTimeout(() => {
             punchWrap.classList.add("type-out-active");
             typeInto(punchText, punchline, 55, () => {
               punchWrap.classList.remove("type-out-active");
+              punchLine.style.removeProperty("min-height");
               sweepRef.current?.classList.add("motion-sweep");
             });
           }, 1000);
@@ -110,7 +128,7 @@ export function HeroIntro({
       <div className={bodyClassName}>
         <div ref={paraWrapRef} className="transition-all duration-slow ease-out-crisp">
           <p className="text-lead text-slate-650">{paragraph}</p>
-          <p className="mt-3 text-lead font-bold italic uppercase tracking-[0.08em] text-ink-950">
+          <p ref={punchLineRef} className="mt-3 text-lead font-bold italic uppercase tracking-[0.08em] text-ink-950">
             <span ref={punchWrapRef} className="type-out relative inline-block overflow-hidden">
               <span ref={punchTextRef}>{punchline}</span>
               <span
