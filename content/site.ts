@@ -10,7 +10,7 @@ import type { ProductAccent, ProductId } from "@/lib/types";
  * touching a single component or content file.
  */
 export const placeholders = {
-  legalEntityName: process.env.COMPANY_LEGAL_NAME ?? "[FULL LEGAL ENTITY NAME]",
+  legalEntityName: process.env.COMPANY_LEGAL_NAME ?? "Silver Fox Consultancy",
   registrationNumber:
     process.env.COMPANY_REGISTRATION_NUMBER ?? "[REGISTRATION NUMBER]",
   registeredAddress: process.env.COMPANY_ADDRESS ?? "[REGISTERED ADDRESS]",
@@ -177,6 +177,16 @@ export const footerNav = {
   ],
   legal: [{ label: "Privacy Policy", href: "/privacy" }],
 };
+
+export type SocialName = "linkedin" | "x" | "facebook" | "instagram";
+
+/** Footer social icons. Not yet linked to real profiles - href stays "#" until they are. */
+export const socialLinks: { name: SocialName; label: string; href: string }[] = [
+  { name: "linkedin", label: "LinkedIn", href: "#" },
+  { name: "x", label: "X (Twitter)", href: "#" },
+  { name: "facebook", label: "Facebook", href: "#" },
+  { name: "instagram", label: "Instagram", href: "#" },
+];
 
 /**
  * Recurring brand language (docs/SILVERFOX_WEBSITE_CANONICAL.md, section 21).

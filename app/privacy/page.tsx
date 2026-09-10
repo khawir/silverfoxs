@@ -76,7 +76,7 @@ export default function PrivacyPage() {
                 may be sent to:
               </p>
               <p className="mt-4 text-body text-ink-950">
-                SilverFox {placeholders.legalEntityName}
+                {placeholders.legalEntityName}
                 <br />
                 Email:{" "}
                 <a href={`mailto:${placeholders.privacyEmail}`} className="underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare">
