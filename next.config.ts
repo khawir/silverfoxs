@@ -12,8 +12,16 @@ const isDev = process.env.NODE_ENV === "development";
  * "Without Nonces" CSP pattern, 'unsafe-inline' on script-src is the
  * correct, supported trade-off for a static app - it still blocks loading
  * of any *external* malicious script, which is the more common real-world
- * risk. style-src has no equivalent requirement (no CSS-in-JS is used here),
- * so it stays strict with no 'unsafe-inline'.
+ * risk.
+ *
+ * style-src also carries 'unsafe-inline' for the same reason: the site's
+ * motion is built on Motion (motion/react), which drives animated values
+ * via per-frame inline style="" writes - a confirmed, "wontfix" limitation
+ * upstream (github.com/framer/motion/issues/1727), not something a nonce
+ * fixes (Motion's own nonce support only covers a <style> block it injects,
+ * not the ongoing per-frame writes - verified directly, not assumed). A
+ * nonce-based fix would in any case force this entire static site to
+ * dynamic rendering, which is a worse trade-off than 'unsafe-inline' here.
  *
  * upgrade-insecure-requests is production-only: on plain-HTTP local dev,
  * that directive makes the browser try to upgrade every asset request to
@@ -22,7 +30,7 @@ const isDev = process.env.NODE_ENV === "development";
 const baseCsp = `
   default-src 'self';
   script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""};
-  style-src 'self';
+  style-src 'self' 'unsafe-inline';
   img-src 'self' data:;
   font-src 'self';
   connect-src 'self';
@@ -42,7 +50,7 @@ const baseCsp = `
 const contactCsp = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com${isDev ? " 'unsafe-eval'" : ""};
-  style-src 'self';
+  style-src 'self' 'unsafe-inline';
   img-src 'self' data:;
   font-src 'self';
   connect-src 'self' https://challenges.cloudflare.com;

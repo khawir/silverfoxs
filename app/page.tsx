@@ -5,6 +5,7 @@ import { CapabilityGrid } from "@/components/home/CapabilityGrid";
 import { HeroIntro } from "@/components/home/HeroIntro";
 import { KineticSwap } from "@/components/home/KineticSwap";
 import { TechnologyPanel } from "@/components/home/TechnologyPanel";
+import { Reveal } from "@/components/motion/Reveal";
 import { LifecycleScroll } from "@/components/sections/LifecycleScroll";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { Section } from "@/components/ui/Section";
@@ -47,9 +48,9 @@ export default function HomePage() {
       </Section>
 
       {/* 02. Positioning - quiet, restrained */}
-      <Section surface="paper" spacing="tight" border="top">
+      <Section surface="paper" spacing="tight" border="top" className="overflow-hidden">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-          <div className="lg:col-span-3">
+          <Reveal direction="left" className="lg:col-span-3">
             <KineticSwap
               from={content.positioning.label}
               to={content.positioning.resolved}
@@ -57,14 +58,17 @@ export default function HomePage() {
               toClassName="text-mono-label text-flare"
             />
             <h2 className="mt-6 text-h3">{content.positioning.heading}</h2>
-          </div>
-          <div className="border-line-dark/10 lg:col-span-8 lg:col-start-5 lg:border-l lg:pl-10">
+          </Reveal>
+          <Reveal
+            direction="right"
+            className="border-line-dark/10 lg:col-span-8 lg:col-start-5 lg:border-l lg:pl-10"
+          >
             {content.positioning.paragraphs.map((p, i) => (
               <p key={i} className="reading-measure mt-3 text-body text-slate-650 first:mt-0">
                 {p}
               </p>
             ))}
-          </div>
+          </Reveal>
         </div>
       </Section>
 

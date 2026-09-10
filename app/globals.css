@@ -287,15 +287,6 @@ button {
  * a single near-zero-duration frame) leaves each moment fully legible with
  * no separate reduced-motion styling required.
  * ---------------------------------------------------------------------- */
-@keyframes sweep-once {
-  /* translateX % is relative to the bar's own width (w-1/3), not its
-     container, so reaching the container's far edge needs ~3x, not 120%. */
-  from { transform: translateX(-120%); opacity: 0; }
-  15% { opacity: 1; }
-  85% { opacity: 1; }
-  to { transform: translateX(340%); opacity: 0; }
-}
-
 @keyframes caret-blink {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
@@ -337,35 +328,6 @@ button {
   vertical-align: -0.06em;
   background: currentColor;
   animation: caret-blink 0.9s step-end infinite;
-}
-
-.hero-intro-hidden {
-  opacity: 0;
-  transform: translateY(0.5rem);
-}
-
-.motion-sweep {
-  animation: sweep-once 1.1s var(--ease-out-crisp) both;
-}
-
-.lifecycle-node {
-  transition: r 0.3s var(--ease-out-crisp), fill 0.3s var(--ease-out-crisp);
-}
-
-/* Lifecycle scroll section: --progress is written imperatively (element.style.
-   setProperty) by the scroll handler, deliberately outside React state, so
-   scrubbing never triggers a re-render. Descendants read it via var(). */
-[data-lifecycle-track] {
-  --progress: 0;
-}
-
-.lifecycle-line {
-  stroke-dasharray: 1;
-  stroke-dashoffset: calc(1 - var(--progress, 0));
-}
-
-.lifecycle-marker {
-  left: calc(6% + var(--progress, 0) * 88%);
 }
 
 /* ---------------------------------------------------------------------- *

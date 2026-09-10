@@ -1,63 +1,52 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
+import type { ReactNode } from "react";
+import { DURATION, EASE_OUT_CRISP } from "@/lib/motion";
 
-type RevealState = "visible" | "hidden";
+const offsetFor = {
+  up: { y: 8 },
+  left: { x: -32 },
+  right: { x: 32 },
+} as const;
 
 /**
  * A restrained entrance reveal used across the homepage narrative sections.
+ * Built on Motion's `useInView` (once: true) rather than a hand-rolled
+ * IntersectionObserver: it correctly handles an element that's already
+ * substantially on screen at mount (no permanently-stuck-hidden state, no
+ * flash), which a hand-rolled "already visible" percentage check got wrong
+ * for short elements sitting just past a hero.
  *
- * Progressive-enhancement safe: content is visible by default (as rendered
- * by the server) and only opts into a hidden starting state once mounted in
- * the browser, and only for elements that are not already on screen. If
- * JavaScript never runs, or `prefers-reduced-motion: reduce` is set, nothing
- * is ever hidden - the reveal is purely a bonus, never a requirement to read
- * the page.
+ * Respects `prefers-reduced-motion` automatically via Motion's built-in
+ * handling - no separate matchMedia check needed.
  */
 export function Reveal({
   children,
   className = "",
-  delayClass = "",
+  direction = "up",
+  delay = 0,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
-  delayClass?: string;
+  /** Which way it travels in from. Defaults to the subtle vertical nudge used everywhere else on the site. */
+  direction?: "up" | "left" | "right";
+  /** Seconds to wait before this reveal starts, once triggered. */
+  delay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [state, setState] = useState<RevealState>("visible");
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const rect = el.getBoundingClientRect();
-    const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
-    if (alreadyVisible) return;
-
-    setState("hidden");
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setState("visible");
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={`transition-all duration-slow ease-out-crisp ${delayClass} ${
-        state === "hidden" ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100"
-      } ${className}`}
+      className={className}
+      initial={{ opacity: 0, ...offsetFor[direction] }}
+      animate={inView ? { opacity: 1, x: 0, y: 0 } : undefined}
+      transition={{ duration: DURATION.slow, ease: EASE_OUT_CRISP, delay }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
