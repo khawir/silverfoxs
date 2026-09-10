@@ -82,7 +82,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
       role="dialog"
       aria-modal="true"
       aria-label="Site navigation"
-      className="fixed inset-0 z-[100] flex flex-col bg-ink-950 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] text-bone-050 md:hidden"
+      className="fixed inset-0 z-[100] flex flex-col bg-ink-950 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] text-bone-050 lg:hidden"
       data-surface="ink"
     >
       <div className="shell flex h-16 shrink-0 items-center justify-between border-b border-line-dark">

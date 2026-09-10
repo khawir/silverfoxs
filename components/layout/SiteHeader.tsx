@@ -76,7 +76,7 @@ export function SiteHeader() {
       >
         <Logo />
 
-        <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           <button
             ref={servicesBtnRef}
             type="button"
@@ -84,7 +84,7 @@ export function SiteHeader() {
             aria-controls="services-mega-menu"
             aria-haspopup="true"
             onClick={() => toggleMenu("services")}
-            className={`relative px-4 py-2 text-[0.95rem] font-medium transition-colors duration-fast ease-out-crisp hover:text-flare ${
+            className={`relative cursor-pointer px-4 py-2 text-[0.95rem] font-medium transition-colors duration-fast ease-out-crisp hover:text-flare ${
               openMenu === "services" ? "text-flare" : "text-ink-950"
             }`}
           >
@@ -97,7 +97,7 @@ export function SiteHeader() {
             aria-controls="technologies-mega-menu"
             aria-haspopup="true"
             onClick={() => toggleMenu("technologies")}
-            className={`relative px-4 py-2 text-[0.95rem] font-medium transition-colors duration-fast ease-out-crisp hover:text-flare ${
+            className={`relative cursor-pointer px-4 py-2 text-[0.95rem] font-medium transition-colors duration-fast ease-out-crisp hover:text-flare ${
               openMenu === "technologies" ? "text-flare" : "text-ink-950"
             }`}
           >
@@ -107,7 +107,7 @@ export function SiteHeader() {
             href="/engineering"
             className="px-4 py-2 text-[0.95rem] font-medium text-ink-950 transition-colors duration-fast ease-out-crisp hover:text-flare"
           >
-            Engineering &amp; R&amp;D
+            Engineering
           </Link>
           <Link
             href="/about"
@@ -124,7 +124,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <CtaLink href="/contact" size="sm" className="max-lg:hidden">
+          <CtaLink href="/contact" size="sm" className="max-xl:hidden">
             {globalCta.talkToSpecialist}
           </CtaLink>
           <button
@@ -133,7 +133,7 @@ export function SiteHeader() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
             onClick={() => setMobileOpen((v) => !v)}
-            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
+            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 lg:hidden"
           >
             <span className="sr-only">{mobileOpen ? "Close menu" : "Open menu"}</span>
             <span

@@ -46,7 +46,17 @@
 
 /* ---------------------------------------------------------------------- *
  * Base layer
+ *
+ * Wrapped in @layer base (Tailwind's own layer order, declared by
+ * `@import "tailwindcss"` above, is theme, base, components, utilities):
+ * left unlayered, these element-selector resets - `button { font: inherit }`
+ * in particular - permanently beat any utility applied alongside them
+ * (e.g. `font-medium` on a <button>), per the same cascade-layers rule the
+ * type scale block below already relies on. That silently made the header's
+ * Services/Technologies <button> triggers render lighter than its <Link>
+ * items, which all carry the same `font-medium` class.
  * ---------------------------------------------------------------------- */
+@layer base {
 :root {
   --gutter: clamp(20px, 4vw, 72px);
   --content-max: 1440px;
@@ -97,6 +107,7 @@ button {
   font: inherit;
   color: inherit;
 }
+} /* @layer base */
 
 /* ---------------------------------------------------------------------- *
  * Skip link
@@ -138,8 +149,8 @@ button {
  * ---------------------------------------------------------------------- */
 @layer components {
 .text-display-xl {
-  /* Hero H1 only: ~42px mobile floor to 72px desktop ceiling. */
-  font-size: clamp(2.625rem, 2.1rem + 3.2vw, 4.5rem);
+  /* Hero H1 only: ~34px mobile floor to 56px desktop ceiling. */
+  font-size: clamp(2.125rem, 1.7rem + 2.5vw, 3.5rem);
   line-height: 1.04;
   letter-spacing: -0.015em;
   font-weight: 600;

@@ -156,13 +156,13 @@ export const engineeringNav = {
   name: "Engineering & Applied R&D",
   descriptor:
     "Secure software engineering, cybersecurity product development, automation, AI and machine learning, computer vision, edge systems and applied research.",
-  cta: "Explore Engineering & R&D",
+  cta: "Explore Engineering & Applied R&D",
 };
 
 export const primaryNav = [
   { label: "Services", href: "/services" },
   { label: "Technologies", href: "/technologies" },
-  { label: "Engineering & R&D", href: "/engineering" },
+  { label: "Engineering", href: "/engineering" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

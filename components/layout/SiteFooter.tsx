@@ -29,19 +29,14 @@ export function SiteFooter() {
   return (
     <footer data-surface="ink" className="relative overflow-hidden border-t border-line-dark bg-ink-950 text-bone-050">
       <div className="shell relative py-16 md:py-24">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-4">
-          <div className="relative">
-            <Mark
-              aria-hidden="true"
-              className="pointer-events-none absolute -left-10 -top-16 h-64 w-64 text-graphite-800 md:h-80 md:w-80"
-            />
-            <p className="relative text-footer-statement text-bone-050">{siteConfig.tagline}</p>
-            <p className="relative mt-6 max-w-[46ch] text-body text-line-light">
-              {siteConfig.description}
-            </p>
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <Mark aria-hidden="true" className="pointer-events-none h-20 w-20 text-flare md:h-28 md:w-28" />
+            <p className="mt-6 text-footer-statement text-bone-050">{siteConfig.tagline}</p>
+            <p className="mt-6 max-w-[60ch] text-body text-line-light">{siteConfig.description}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-[2fr_1fr_1fr] lg:col-span-3">
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-[2fr_1fr_1fr] lg:col-span-6">
             <FooterColumn title="Services" links={footerNav.services} />
             <FooterColumn title="Technologies" links={footerNav.technologies} />
             <FooterColumn title="Company" links={[...footerNav.company, ...footerNav.legal]} />
