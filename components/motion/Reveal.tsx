@@ -54,7 +54,7 @@ export function Reveal({
     <div
       ref={ref}
       className={`transition-all duration-slow ease-out-crisp ${delayClass} ${
-        state === "hidden" ? "translate-y-4 opacity-0" : "translate-y-0 opacity-100"
+        state === "hidden" ? "translate-y-2 opacity-0" : "translate-y-0 opacity-100"
       } ${className}`}
     >
       {children}

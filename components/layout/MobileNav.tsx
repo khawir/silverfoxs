@@ -1,23 +1,54 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Logo } from "@/components/brand/Logo";
 import { engineeringNav, globalCta, primaryNav, productsNav, servicesNav } from "@/content/site";
 
+/**
+ * The mobile navigation drawer. Deliberately self-contained (own header row,
+ * own close control, own focus management) rather than relying on the
+ * desktop header staying visible underneath it - docs/UPDATE.md section 16.
+ */
 export function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [technologiesOpen, setTechnologiesOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+
+    const previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    closeBtnRef.current?.focus();
+
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (event.key !== "Tab" || !panelRef.current) return;
+
+      const focusable = panelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
+
     document.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.documentElement.style.overflow = previousOverflow;
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [open, onClose]);
@@ -26,37 +57,54 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
 
   return (
     <div
+      ref={panelRef}
       role="dialog"
       aria-modal="true"
       aria-label="Site navigation"
-      className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-ink-950 text-bone-050 md:hidden"
+      className="fixed inset-0 z-50 flex flex-col bg-ink-950 text-bone-050 md:hidden"
       data-surface="ink"
+      style={{ paddingTop: "env(safe-area-inset-top)", paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <div className="shell flex flex-1 flex-col pb-10 pt-28">
-        <nav className="flex flex-col divide-y divide-line-dark">
-          <div className="py-5">
+      <div className="shell flex h-16 shrink-0 items-center justify-between border-b border-line-dark">
+        <Logo />
+        <button
+          ref={closeBtnRef}
+          type="button"
+          onClick={onClose}
+          className="-mr-2 flex h-11 w-11 items-center justify-center"
+        >
+          <span className="sr-only">Close menu</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5">
+            <path d="M5 5l14 14M19 5 5 19" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <div className="shell flex flex-1 flex-col overflow-y-auto pb-8 pt-4">
+        <nav aria-label="Primary" className="flex flex-col divide-y divide-line-dark">
+          <div className="py-4">
             <button
               type="button"
               aria-expanded={servicesOpen}
               aria-controls="mobile-services-group"
               onClick={() => setServicesOpen((v) => !v)}
-              className="flex w-full items-center justify-between text-left"
+              className="flex min-h-11 w-full items-center justify-between text-left"
             >
-              <span className="text-h3">01. Services</span>
+              <span className="text-h3">Services</span>
               <span aria-hidden="true" className="text-2xl font-light">
                 {servicesOpen ? "−" : "+"}
               </span>
             </button>
             {servicesOpen && (
-              <ul id="mobile-services-group" className="mt-5 flex flex-col gap-1">
+              <ul id="mobile-services-group" className="mt-3 flex flex-col gap-1">
                 {servicesNav.map((service) => (
                   <li key={service.slug}>
                     <Link
                       href={`/services/${service.slug}`}
                       onClick={onClose}
-                      className="block py-2.5 text-[1.05rem] text-line-light hover:text-bone-050"
+                      className="block min-h-11 py-2.5 text-[1.05rem] text-line-light hover:text-bone-050"
                     >
-                      {service.number}. {service.name}
+                      {service.name}
                     </Link>
                   </li>
                 ))}
@@ -64,7 +112,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
                   <Link
                     href="/services"
                     onClick={onClose}
-                    className="mt-2 block py-2.5 text-small font-semibold uppercase tracking-wide text-flare"
+                    className="mt-1 block min-h-11 py-2.5 text-small font-semibold uppercase tracking-wide text-flare"
                   >
                     View All Services
                   </Link>
@@ -73,27 +121,27 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
             )}
           </div>
 
-          <div className="py-5">
+          <div className="py-4">
             <button
               type="button"
               aria-expanded={technologiesOpen}
               aria-controls="mobile-technologies-group"
               onClick={() => setTechnologiesOpen((v) => !v)}
-              className="flex w-full items-center justify-between text-left"
+              className="flex min-h-11 w-full items-center justify-between text-left"
             >
-              <span className="text-h3">02. Technologies</span>
+              <span className="text-h3">Technology</span>
               <span aria-hidden="true" className="text-2xl font-light">
                 {technologiesOpen ? "−" : "+"}
               </span>
             </button>
             {technologiesOpen && (
-              <ul id="mobile-technologies-group" className="mt-5 flex flex-col gap-1">
+              <ul id="mobile-technologies-group" className="mt-3 flex flex-col gap-1">
                 {productsNav.map((product) => (
                   <li key={product.id}>
                     <Link
                       href={`/technologies/${product.slug}`}
                       onClick={onClose}
-                      className="block py-2.5 text-[1.05rem] text-line-light hover:text-bone-050"
+                      className="block min-h-11 py-2.5 text-[1.05rem] text-line-light hover:text-bone-050"
                     >
                       {product.id}
                     </Link>
@@ -103,7 +151,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
                   <Link
                     href="/technologies"
                     onClick={onClose}
-                    className="mt-2 block py-2.5 text-small font-semibold uppercase tracking-wide text-flare"
+                    className="mt-1 block min-h-11 py-2.5 text-small font-semibold uppercase tracking-wide text-flare"
                   >
                     View All Technologies
                   </Link>
@@ -112,14 +160,14 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
             )}
           </div>
 
-          {primaryNav.slice(2).map((item, index) => (
+          {primaryNav.slice(2).map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={onClose}
-              className="py-5 text-h3"
+              className="flex min-h-11 items-center py-4 text-h3"
             >
-              0{index + 3}. {item.label === "Engineering & R&D" ? engineeringNav.name : item.label}
+              {item.label === "Engineering & R&D" ? engineeringNav.name : item.label}
             </Link>
           ))}
         </nav>
@@ -127,7 +175,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
         <Link
           href="/contact"
           onClick={onClose}
-          className="mt-10 block bg-flare px-6 py-4 text-center text-[1.05rem] font-semibold text-ink-950"
+          className="mt-6 flex min-h-11 items-center justify-center bg-flare px-6 py-4 text-center text-[1.05rem] font-semibold text-ink-950"
         >
           {globalCta.talkToSpecialist}
         </Link>

@@ -19,6 +19,7 @@ export function SiteHeader() {
   const headerRef = useRef<HTMLElement>(null);
   const servicesBtnRef = useRef<HTMLButtonElement>(null);
   const technologiesBtnRef = useRef<HTMLButtonElement>(null);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const [lastPathname, setLastPathname] = useState(pathname);
 
@@ -127,6 +128,7 @@ export function SiteHeader() {
             {globalCta.talkToSpecialist}
           </CtaLink>
           <button
+            ref={mobileToggleRef}
             type="button"
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
@@ -166,7 +168,13 @@ export function SiteHeader() {
       )}
 
       <div id="mobile-navigation">
-        <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} />
+        <MobileNav
+          open={mobileOpen}
+          onClose={() => {
+            setMobileOpen(false);
+            mobileToggleRef.current?.focus();
+          }}
+        />
       </div>
     </header>
   );

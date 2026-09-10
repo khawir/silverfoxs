@@ -123,45 +123,55 @@ button {
 
 /* ---------------------------------------------------------------------- *
  * Editorial type scale (fluid, clamp-based)
- * docs/SILVERFOX_WEBSITE_PRESENTATION_SPEC.md, section 4.2
+ * docs/SILVERFOX_WEBSITE_PRESENTATION_SPEC.md, section 4.2 - rescaled per
+ * docs/UPDATE.md section 3 (major hero statements only get the largest
+ * sizes; everything else sits in a much more restrained range).
  * ---------------------------------------------------------------------- */
 .text-display-xl {
-  font-size: clamp(3.375rem, 2.2rem + 5.2vw, 9rem);
-  line-height: 0.98;
-  letter-spacing: -0.02em;
-  font-weight: 600;
-}
-
-.text-display {
-  font-size: clamp(2.75rem, 2rem + 3.2vw, 6rem);
-  line-height: 1.02;
+  /* Hero H1 only: ~42px mobile floor to 72px desktop ceiling. */
+  font-size: clamp(2.625rem, 2.1rem + 3.2vw, 4.5rem);
+  line-height: 1.04;
   letter-spacing: -0.015em;
   font-weight: 600;
 }
 
+.text-display {
+  /* A single step down from the hero - for the rare second high-impact
+     statement (e.g. the closing CTA line), never repeated more than once
+     or twice per page. */
+  font-size: clamp(2.25rem, 1.85rem + 2.4vw, 3.75rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
 .text-h1 {
-  font-size: clamp(2.5rem, 1.9rem + 2.6vw, 5.25rem);
-  line-height: 1.04;
+  /* Page H1: 34px mobile to 60px desktop. */
+  font-size: clamp(2.125rem, 1.75rem + 1.9vw, 3.75rem);
+  line-height: 1.1;
   letter-spacing: -0.01em;
   font-weight: 600;
 }
 
 .text-h2 {
-  font-size: clamp(2rem, 1.6rem + 1.7vw, 4rem);
-  line-height: 1.08;
+  /* Section H2: ~29px mobile to 44px desktop. */
+  font-size: clamp(1.8rem, 1.6rem + 1.1vw, 2.75rem);
+  line-height: 1.15;
   letter-spacing: -0.01em;
   font-weight: 600;
 }
 
 .text-h3 {
-  font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2.25rem);
-  line-height: 1.18;
+  /* Section/Card H3: 21px mobile to 30px desktop. */
+  font-size: clamp(1.3125rem, 1.2rem + 0.6vw, 1.875rem);
+  line-height: 1.25;
   font-weight: 600;
 }
 
 .text-lead {
-  font-size: clamp(1.1875rem, 1.05rem + 0.55vw, 1.75rem);
-  line-height: 1.4;
+  /* Body Large: 18px to 20px. */
+  font-size: clamp(1.125rem, 1.08rem + 0.2vw, 1.25rem);
+  line-height: 1.45;
   font-weight: 400;
 }
 

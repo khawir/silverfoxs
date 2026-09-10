@@ -13,10 +13,15 @@ const surfaceStyles: Record<Surface, string> = {
   flare: "bg-flare text-ink-950",
 };
 
+/**
+ * Vertical rhythm per docs/UPDATE.md section 18: desktop ~80-120px, tablet
+ * ~64-88px, mobile ~48-72px - not a single spacing value stretched across
+ * every breakpoint.
+ */
 const spacingStyles: Record<Spacing, string> = {
-  chapter: "py-[clamp(4.5rem,3.4rem+6.5vw,13rem)]",
-  standard: "py-[clamp(3.5rem,2.9rem+3.6vw,9rem)]",
-  tight: "py-[clamp(2.25rem,1.9rem+2vw,5rem)]",
+  chapter: "py-[clamp(4rem,3rem+5vw,7.5rem)]",
+  standard: "py-[clamp(3rem,2.2rem+3.2vw,6rem)]",
+  tight: "py-[clamp(2.5rem,2rem+2vw,4.5rem)]",
   none: "",
 };
 
