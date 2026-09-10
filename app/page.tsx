@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Mark } from "@/components/brand/Mark";
 import { BrandStatement } from "@/components/home/BrandStatement";
 import { CapabilityGrid } from "@/components/home/CapabilityGrid";
-import { HeroAttackPath } from "@/components/home/HeroAttackPath";
 import { KineticSwap } from "@/components/home/KineticSwap";
 import { TechnologyPanel } from "@/components/home/TechnologyPanel";
 import { Reveal } from "@/components/motion/Reveal";
@@ -20,37 +19,32 @@ export default function HomePage() {
       {/* Organisation structured data: static, hash-allowed under CSP - see next.config.ts */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: organizationJsonLdString }} />
 
-      {/* 01. Hero - high impact: the attack-path visual is the header act */}
-      <Section surface="bone" spacing="none" className="relative overflow-hidden pb-14 pt-12 md:pb-20 md:pt-16 lg:pb-16 lg:pt-20">
+      {/* 01. Hero - high impact, but sized to fit a normal laptop viewport */}
+      <Section surface="bone" spacing="none" className="relative overflow-hidden pb-14 pt-12 md:pb-20 md:pt-16 lg:pb-24 lg:pt-20">
         <Mark
           aria-hidden="true"
-          className="pointer-events-none absolute -right-20 -top-16 h-64 w-64 text-paper-100 md:h-80 md:w-80 lg:h-96 lg:w-96"
+          className="pointer-events-none absolute -right-32 -top-10 h-[26rem] w-[26rem] text-paper-100 md:-right-16 md:h-[34rem] md:w-[34rem] lg:h-[40rem] lg:w-[40rem]"
         />
-        <div className="relative grid grid-cols-1 items-center gap-12 lg:min-h-[80svh] lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-6">
-            <Reveal>
-              <h1 className="text-display-xl">{content.hero.heading}</h1>
-            </Reveal>
-            <Reveal delayClass="delay-150">
-              {content.hero.paragraphs.map((p, i) => (
-                <p key={i} className={`text-lead text-slate-650 ${i > 0 ? "mt-1" : ""}`}>
-                  {p}
-                </p>
-              ))}
-              <div className="mt-8 flex flex-wrap gap-4">
-                <CtaLink href={contactHref()} variant="primary">
-                  {globalCta.talkToSpecialist}
-                </CtaLink>
-                <CtaLink href="/services" variant="ghost-on-light">
-                  {globalCta.exploreCapabilities}
-                </CtaLink>
-              </div>
-              <p className="mt-8 text-mono-label text-slate-650">{content.hero.microcopy}</p>
-            </Reveal>
-          </div>
-          <div className="lg:col-span-6">
-            <HeroAttackPath className="mx-auto max-w-xs md:max-w-sm lg:max-w-none" />
-          </div>
+        <div className="relative grid grid-cols-1 gap-8 lg:grid-cols-12">
+          <Reveal className="lg:col-span-8">
+            <h1 className="text-display-xl">{content.hero.heading}</h1>
+          </Reveal>
+          <Reveal delayClass="delay-150" className="lg:col-span-7">
+            {content.hero.paragraphs.map((p, i) => (
+              <p key={i} className={`text-lead text-slate-650 ${i > 0 ? "mt-1" : ""}`}>
+                {p}
+              </p>
+            ))}
+            <div className="mt-8 flex flex-wrap gap-4">
+              <CtaLink href={contactHref()} variant="primary">
+                {globalCta.talkToSpecialist}
+              </CtaLink>
+              <CtaLink href="/services" variant="ghost-on-light">
+                {globalCta.exploreCapabilities}
+              </CtaLink>
+            </div>
+            <p className="mt-8 text-mono-label text-slate-650">{content.hero.microcopy}</p>
+          </Reveal>
         </div>
       </Section>
 
