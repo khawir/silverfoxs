@@ -326,6 +326,24 @@ button {
   animation: caret-blink 0.9s step-end infinite;
 }
 
+/* HeroIntro's headline caret: same blink, no opacity-dim - the primary H1
+   should stay fully legible while it types, not fade like the punchline. */
+.typing-caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.06em;
+  height: 0.85em;
+  margin-left: 0.04em;
+  vertical-align: -0.06em;
+  background: currentColor;
+  animation: caret-blink 0.9s step-end infinite;
+}
+
+.hero-intro-hidden {
+  opacity: 0;
+  transform: translateY(0.5rem);
+}
+
 .motion-sweep {
   animation: sweep-once 1.1s var(--ease-out-crisp) both;
 }

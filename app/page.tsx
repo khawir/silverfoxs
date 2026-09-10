@@ -2,10 +2,9 @@ import Link from "next/link";
 import { Mark } from "@/components/brand/Mark";
 import { BrandStatement } from "@/components/home/BrandStatement";
 import { CapabilityGrid } from "@/components/home/CapabilityGrid";
+import { HeroIntro } from "@/components/home/HeroIntro";
 import { KineticSwap } from "@/components/home/KineticSwap";
 import { TechnologyPanel } from "@/components/home/TechnologyPanel";
-import { Reveal } from "@/components/motion/Reveal";
-import { TypeOut } from "@/components/motion/TypeOut";
 import { LifecycleScroll } from "@/components/sections/LifecycleScroll";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { Section } from "@/components/ui/Section";
@@ -27,14 +26,13 @@ export default function HomePage() {
           className="pointer-events-none absolute -right-32 -top-10 h-[26rem] w-[26rem] text-paper-100 md:-right-16 md:h-[34rem] md:w-[34rem] lg:h-[40rem] lg:w-[40rem]"
         />
         <div className="relative grid grid-cols-1 gap-8 lg:grid-cols-12">
-          <Reveal className="lg:col-span-8">
-            <h1 className="text-display-xl">{content.hero.heading}</h1>
-          </Reveal>
-          <Reveal delayClass="delay-150" className="lg:col-span-7">
-            <p className="text-lead text-slate-650">{content.hero.paragraphs[0]}</p>
-            <p className="mt-3 text-lead font-bold italic uppercase tracking-[0.08em] text-ink-950">
-              <TypeOut text={content.hero.paragraphs[1]} startDelayMs={3000} sweepOnComplete />
-            </p>
+          <HeroIntro
+            heading={content.hero.heading}
+            paragraph={content.hero.paragraphs[0]}
+            punchline={content.hero.paragraphs[1]}
+            headingClassName="lg:col-span-8"
+            bodyClassName="lg:col-span-7"
+          >
             <div className="mt-8 flex flex-wrap gap-4">
               <CtaLink href={contactHref()} variant="primary">
                 {globalCta.talkToSpecialist}
@@ -44,7 +42,7 @@ export default function HomePage() {
               </CtaLink>
             </div>
             <p className="mt-8 text-mono-label text-slate-650">{content.hero.microcopy}</p>
-          </Reveal>
+          </HeroIntro>
         </div>
       </Section>
 
