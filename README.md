@@ -86,9 +86,13 @@ Vercel Firewall/WAF rate limiting rule instead.
   blanket exception.
 - HSTS, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` and a
   restrictive `Permissions-Policy` are set on every route.
-- No secrets are ever exposed to the client; only
-  `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `NEXT_PUBLIC_SITE_URL` use the
-  `NEXT_PUBLIC_` prefix, and both are meant to be public.
+- No secrets are ever exposed to the client; only `NEXT_PUBLIC_SITE_URL` uses
+  the `NEXT_PUBLIC_` prefix. `TURNSTILE_SITE_KEY` is not a secret either -
+  Turnstile requires it in the page's HTML for the widget to work - but it
+  is deliberately kept unprefixed and read server-side in
+  [`app/contact/page.tsx`](app/contact/page.tsx), then passed to
+  [`components/forms/Turnstile.tsx`](components/forms/Turnstile.tsx) as a
+  prop, rather than inlined into client JavaScript via `NEXT_PUBLIC_`.
 
 ## Deployment
 

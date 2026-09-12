@@ -44,7 +44,7 @@ export default async function ContactPage({
           <div className="border border-line-light bg-paper-100/40 p-8 lg:col-span-7 lg:p-10">
             <h2 className="text-mono-label text-slate-650">{contactContent.form.heading}</h2>
             <div className="mt-6">
-              <ContactForm initialTopic={topic} />
+              <ContactForm initialTopic={topic} turnstileSiteKey={process.env.TURNSTILE_SITE_KEY} />
             </div>
           </div>
         </div>
