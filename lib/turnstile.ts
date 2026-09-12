@@ -9,7 +9,7 @@ import { isTurnstileConfigured } from "./env";
 export async function verifyTurnstileToken(token: string | undefined, remoteIp: string) {
   if (!isTurnstileConfigured) {
     console.warn(
-      "[contact] TURNSTILE_SECRET_KEY / NEXT_PUBLIC_TURNSTILE_SITE_KEY not set - skipping bot verification."
+      "[contact] TURNSTILE_SECRET_KEY / TURNSTILE_SITE_KEY not set - skipping bot verification."
     );
     return true;
   }

@@ -8,7 +8,13 @@ type Status = "idle" | "submitting" | "success" | "error";
 
 type FieldErrors = Record<string, string[] | undefined>;
 
-export function ContactForm({ initialTopic }: { initialTopic?: string }) {
+export function ContactForm({
+  initialTopic,
+  turnstileSiteKey,
+}: {
+  initialTopic?: string;
+  turnstileSiteKey?: string;
+}) {
   const formRef = useRef<HTMLFormElement>(null);
   const topicRef = useRef<HTMLSelectElement>(null);
   const [status, setStatus] = useState<Status>("idle");
@@ -176,7 +182,7 @@ export function ContactForm({ initialTopic }: { initialTopic?: string }) {
       </label>
       {fieldErrors.privacyAccepted && <FieldError messages={fieldErrors.privacyAccepted} />}
 
-      <Turnstile />
+      <Turnstile siteKey={turnstileSiteKey} />
 
       <p className="text-small text-slate-650">{contactContent.form.microcopy}</p>
 

@@ -161,8 +161,14 @@ ZOHO_SMTP_USER=
 ZOHO_SMTP_PASSWORD=
 CONTACT_EMAIL=
 TURNSTILE_SECRET_KEY=
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=
+TURNSTILE_SITE_KEY=
 ```
+
+`TURNSTILE_SITE_KEY` is intentionally not `NEXT_PUBLIC_`-prefixed. It ends up
+in the rendered page HTML regardless (Turnstile requires that to function),
+but it is read server-side and passed to the client widget as a prop, so it
+never needs to be inlined into the client JavaScript bundle the way a
+`NEXT_PUBLIC_` var is.
 
 Only values that genuinely need to be available in the browser may use the `NEXT_PUBLIC_` prefix.
 
