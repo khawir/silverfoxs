@@ -2468,7 +2468,7 @@ Do not add navigation or presentation sections for:
 - Terms of Use
 - a standalone Cookies page
 - additional products
-- a seventh service
+- a seventh service (post-launch client-requested audit/certification/consulting scope was folded into the existing Cyber Strategy, Risk & Assurance service instead - see the "No seventh service" note in SILVERFOX_WEBSITE_CANONICAL.md)
 
 Industry relevance may appear inside appropriate service and product pages, as defined in the canonical content.
 

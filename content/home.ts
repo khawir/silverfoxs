@@ -24,6 +24,22 @@ export const homeContent = {
     intro:
       "From board-level cyber risk to deeply technical security operations, SilverFox provides specialist capabilities across six core practices.",
   },
+  certifications: {
+    kineticFrom: "CLAIMED.",
+    kineticTo: "CERTIFIED.",
+    heading: "Independently assessed. Formally certified.",
+    intro:
+      "SilverFox holds and delivers audits against the standards that matter most to regulated and security-conscious organisations - because credibility should be demonstrated, not declared.",
+    items: [
+      { name: "ISO/IEC 27001", body: "Information Security Management" },
+      { name: "ISO 9001", body: "Quality Management" },
+      { name: "SWIFT CSP", body: "Customer Security Programme" },
+      { name: "CMMC", body: "Cybersecurity Maturity Model Certification" },
+      { name: "OSCP", body: "Offensive Security Certified Professional" },
+      { name: "CREST", body: "Certified security testing" },
+      { name: "CISSP", body: "Certified Information Systems Security Professional" },
+    ],
+  },
   attackPath: {
     heading: "Attackers see paths. We do too.",
     path: [

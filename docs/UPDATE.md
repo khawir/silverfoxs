@@ -297,6 +297,22 @@ Mobile should use one clean vertical column.
 
 ---
 
+## Section 4b: Certifications & Accreditations *(added post-launch)*
+
+Directly below the capability grid. Given the same kicker/headline/intro treatment as every other homepage section (Section 4's own KineticSwap -> h2 -> intro pattern) - it is a full credibility moment, not a footnote.
+
+Kinetic swap: **CLAIMED.** -> **CERTIFIED.**
+
+Headline: **Independently assessed. Formally certified.**
+
+Inverted to a dark (graphite) surface - deliberately distinct from both neighbours (Capabilities is bone, Connected Security is paper) rather than blending into either.
+
+Below the intro, a continuously drifting strip of bordered badge cards (no logo images yet - see docs/SILVERFOX_WEBSITE_CANONICAL.md's "Certifications & Accreditations" homepage entry for why, and for the swap-in path once real badge artwork is supplied): ISO/IEC 27001, ISO 9001, SWIFT CSP, CMMC, OSCP, CREST, CISSP, each with a one-line plain-English expansion.
+
+Pauses on hover/focus so it can actually be read. Falls under the sitewide reduced-motion rule like every other motion moment on the site - no separate handling needed.
+
+---
+
 # 6. Remove Detailed Service Scope From Homepage
 
 This is important.
@@ -567,6 +583,9 @@ Quiet / restrained
 
 CAPABILITIES
 Structured
+
+CERTIFICATIONS & ACCREDITATIONS (added post-launch)
+Contrast / credibility - inverted (dark) so it reads as a deliberate moment, not filler
 
 CONNECTED SECURITY
 Visual / technical
