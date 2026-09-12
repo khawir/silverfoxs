@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { ContactMethodIcon } from "@/components/ui/ContactMethodIcon";
 import { IncidentResponseCta } from "@/components/ui/IncidentResponseCta";
 import { Section } from "@/components/ui/Section";
 import { contactContent } from "@/content/contact";
@@ -41,21 +42,27 @@ export default async function ContactPage({
             {(hasGeneralContactEmail || hasPublicPhone || hasWhatsApp) && (
               <div className="mt-8">
                 <p className="text-mono-label text-slate-650">Prefer to reach us directly?</p>
-                <div className="mt-3 flex flex-col gap-1.5 text-body text-ink-950">
+                <div className="mt-3 flex flex-col gap-2 text-body text-ink-950">
                   {hasGeneralContactEmail && (
                     <a
                       href={`mailto:${placeholders.generalContactEmail}`}
-                      className="w-fit font-semibold underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare"
+                      className="inline-flex w-fit items-center gap-2 font-semibold"
                     >
-                      {placeholders.generalContactEmail}
+                      <ContactMethodIcon method="email" className="h-4 w-4 shrink-0 text-slate-650" />
+                      <span className="underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare">
+                        {placeholders.generalContactEmail}
+                      </span>
                     </a>
                   )}
                   {hasPublicPhone && (
                     <a
                       href={`tel:${placeholders.publicPhone.replace(/[^+\d]/g, "")}`}
-                      className="w-fit font-semibold underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare"
+                      className="inline-flex w-fit items-center gap-2 font-semibold"
                     >
-                      {placeholders.publicPhone}
+                      <ContactMethodIcon method="phone" className="h-4 w-4 shrink-0 text-slate-650" />
+                      <span className="underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare">
+                        {placeholders.publicPhone}
+                      </span>
                     </a>
                   )}
                   {hasWhatsApp && (
@@ -63,9 +70,12 @@ export default async function ContactPage({
                       href={whatsAppHref("Hi SilverFox, I'd like to get in touch.")}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-fit font-semibold underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare"
+                      className="inline-flex w-fit items-center gap-2 font-semibold"
                     >
-                      Chat on WhatsApp
+                      <ContactMethodIcon method="whatsapp" className="h-4 w-4 shrink-0 text-slate-650" />
+                      <span className="underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare">
+                        Chat on WhatsApp
+                      </span>
                     </a>
                   )}
                 </div>

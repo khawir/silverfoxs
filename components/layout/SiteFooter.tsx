@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mark } from "@/components/brand/Mark";
 import { SocialIcon } from "@/components/brand/SocialIcon";
+import { ContactMethodIcon } from "@/components/ui/ContactMethodIcon";
 import {
   footerNav,
   hasGeneralContactEmail,
@@ -45,20 +46,22 @@ export function SiteFooter() {
             <p className="mt-6 max-w-[60ch] text-body text-line-light">{siteConfig.description}</p>
 
             {(hasGeneralContactEmail || hasPublicPhone || hasWhatsApp) && (
-              <div className="mt-6 flex flex-col gap-2 text-[0.95rem]">
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.95rem]">
                 {hasGeneralContactEmail && (
                   <a
                     href={`mailto:${placeholders.generalContactEmail}`}
-                    className="w-fit text-line-light transition-colors duration-fast ease-out-crisp hover:text-bone-050"
+                    className="inline-flex w-fit items-center gap-2 text-line-light transition-colors duration-fast ease-out-crisp hover:text-bone-050"
                   >
+                    <ContactMethodIcon method="email" className="h-4 w-4 shrink-0" />
                     {placeholders.generalContactEmail}
                   </a>
                 )}
                 {hasPublicPhone && (
                   <a
                     href={`tel:${placeholders.publicPhone.replace(/[^+\d]/g, "")}`}
-                    className="w-fit text-line-light transition-colors duration-fast ease-out-crisp hover:text-bone-050"
+                    className="inline-flex w-fit items-center gap-2 text-line-light transition-colors duration-fast ease-out-crisp hover:text-bone-050"
                   >
+                    <ContactMethodIcon method="phone" className="h-4 w-4 shrink-0" />
                     {placeholders.publicPhone}
                   </a>
                 )}
@@ -67,8 +70,9 @@ export function SiteFooter() {
                     href={whatsAppHref("Hi SilverFox, I'd like to get in touch.")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-fit text-line-light transition-colors duration-fast ease-out-crisp hover:text-bone-050"
+                    className="inline-flex w-fit items-center gap-2 text-line-light transition-colors duration-fast ease-out-crisp hover:text-bone-050"
                   >
+                    <ContactMethodIcon method="whatsapp" className="h-4 w-4 shrink-0" />
                     Chat on WhatsApp
                   </a>
                 )}
