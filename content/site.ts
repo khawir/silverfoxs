@@ -20,6 +20,9 @@ export const placeholders = {
   formRecipientEmail: process.env.CONTACT_EMAIL ?? "[FORM RECIPIENT EMAIL]",
   privacyEmail: process.env.PRIVACY_EMAIL ?? "[PRIVACY EMAIL]",
   publicPhone: process.env.PUBLIC_PHONE ?? "[PUBLIC PHONE]",
+  /** Used only to build the wa.me click-to-chat link below, never displayed
+   * as text - see whatsAppHref. */
+  publicWhatsApp: process.env.PUBLIC_WHATSAPP_NUMBER ?? "",
   incidentResponseContact:
     process.env.INCIDENT_RESPONSE_CONTACT ?? "[INCIDENT RESPONSE CONTACT]",
   /** e.g. "tel:+441234567890" or "mailto:ir@silverfox.example" - the actual
@@ -30,6 +33,29 @@ export const placeholders = {
 
 /** True once a real, dedicated incident-response destination has been configured. */
 export const hasIncidentResponseDestination = Boolean(process.env.INCIDENT_RESPONSE_HREF);
+
+/**
+ * These gate the sitewide contact details (footer, contact page) the same
+ * way hasIncidentResponseDestination gates the incident-response CTA: show
+ * a real, working destination once configured, otherwise show nothing
+ * rather than a bracketed placeholder in a prominent, sitewide spot.
+ */
+export const hasGeneralContactEmail = Boolean(process.env.GENERAL_CONTACT_EMAIL);
+export const hasPublicPhone = Boolean(process.env.PUBLIC_PHONE);
+export const hasWhatsApp = Boolean(process.env.PUBLIC_WHATSAPP_NUMBER);
+
+/**
+ * A WhatsApp "click to chat" link (wa.me) - opens the visitor's own
+ * WhatsApp app or web.whatsapp.com with SilverFox's number and a
+ * pre-filled message, no widget/SDK/API integration required. wa.me wants
+ * the number as plain digits with the country code and no leading "+",
+ * spaces or punctuation, so those are stripped from whatever format
+ * PUBLIC_WHATSAPP_NUMBER is set in.
+ */
+export function whatsAppHref(message: string) {
+  const digits = placeholders.publicWhatsApp.replace(/\D/g, "");
+  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+}
 
 export const siteConfig = {
   name: "SilverFox",
