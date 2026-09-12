@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
+import { clientKeyFromHeaders } from "@/lib/client-ip";
 import { contactSchema } from "@/lib/contact-schema";
 import { sendContactNotification } from "@/lib/email";
-import { checkRateLimit, clientKeyFromHeaders } from "@/lib/rate-limit";
 import { verifyTurnstileToken } from "@/lib/turnstile";
 
+// Rate limiting for this route is intentionally not implemented here - see
+// lib/client-ip.ts for why an in-memory limiter would be misleading on
+// Vercel's serverless infrastructure. Protect this path with a Vercel
+// Firewall/WAF rate limiting rule targeting `/api/contact` instead.
 export async function POST(request: Request) {
   let body: unknown;
   try {
@@ -26,13 +30,6 @@ export async function POST(request: Request) {
   }
 
   const clientKey = clientKeyFromHeaders(request.headers);
-  const rateLimit = checkRateLimit(clientKey);
-  if (!rateLimit.allowed) {
-    return NextResponse.json(
-      { ok: false, message: "Too many requests. Please try again shortly." },
-      { status: 429, headers: { "Retry-After": String(rateLimit.retryAfterSeconds ?? 600) } }
-    );
-  }
 
   const parsed = contactSchema.safeParse(body);
   if (!parsed.success) {
@@ -54,7 +51,13 @@ export async function POST(request: Request) {
     );
   }
 
-  await sendContactNotification(parsed.data);
+  const result = await sendContactNotification(parsed.data);
+  if (!result.delivered && !result.skipped) {
+    return NextResponse.json(
+      { ok: false, message: "Unable to send your message. Please try again." },
+      { status: 502 }
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }
