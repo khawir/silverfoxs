@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { Mark } from "@/components/brand/Mark";
 import { SocialIcon } from "@/components/brand/SocialIcon";
-import { footerNav, placeholders, siteConfig, socialLinks } from "@/content/site";
+import {
+  footerNav,
+  hasGeneralContactEmail,
+  hasPublicPhone,
+  placeholders,
+  siteConfig,
+  socialLinks,
+} from "@/content/site";
 
 function FooterColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
@@ -34,6 +41,27 @@ export function SiteFooter() {
             <Mark aria-hidden="true" className="pointer-events-none h-20 w-20 text-flare md:h-28 md:w-28" />
             <p className="mt-6 text-footer-statement text-bone-050">{siteConfig.tagline}</p>
             <p className="mt-6 max-w-[60ch] text-body text-line-light">{siteConfig.description}</p>
+
+            {(hasGeneralContactEmail || hasPublicPhone) && (
+              <div className="mt-6 flex flex-col gap-2 text-[0.95rem]">
+                {hasGeneralContactEmail && (
+                  <a
+                    href={`mailto:${placeholders.generalContactEmail}`}
+                    className="w-fit text-line-light transition-colors duration-fast ease-out-crisp hover:text-bone-050"
+                  >
+                    {placeholders.generalContactEmail}
+                  </a>
+                )}
+                {hasPublicPhone && (
+                  <a
+                    href={`tel:${placeholders.publicPhone.replace(/[^+\d]/g, "")}`}
+                    className="w-fit text-line-light transition-colors duration-fast ease-out-crisp hover:text-bone-050"
+                  >
+                    {placeholders.publicPhone}
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-[2fr_1fr_1fr] lg:col-span-6">

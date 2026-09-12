@@ -3,6 +3,7 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { IncidentResponseCta } from "@/components/ui/IncidentResponseCta";
 import { Section } from "@/components/ui/Section";
 import { contactContent } from "@/content/contact";
+import { hasGeneralContactEmail, hasPublicPhone, placeholders } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -30,6 +31,31 @@ export default async function ContactPage({
                 </p>
               ))}
             </div>
+
+            {(hasGeneralContactEmail || hasPublicPhone) && (
+              <div className="mt-8">
+                <p className="text-mono-label text-slate-650">Prefer to reach us directly?</p>
+                <p className="mt-3 text-body text-ink-950">
+                  {hasGeneralContactEmail && (
+                    <a
+                      href={`mailto:${placeholders.generalContactEmail}`}
+                      className="font-semibold underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare"
+                    >
+                      {placeholders.generalContactEmail}
+                    </a>
+                  )}
+                  {hasGeneralContactEmail && hasPublicPhone && <br />}
+                  {hasPublicPhone && (
+                    <a
+                      href={`tel:${placeholders.publicPhone.replace(/[^+\d]/g, "")}`}
+                      className="font-semibold underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare"
+                    >
+                      {placeholders.publicPhone}
+                    </a>
+                  )}
+                </p>
+              </div>
+            )}
 
             <div className="mt-10">
               <IncidentResponseCta />

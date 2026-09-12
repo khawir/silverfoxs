@@ -31,6 +31,15 @@ export const placeholders = {
 /** True once a real, dedicated incident-response destination has been configured. */
 export const hasIncidentResponseDestination = Boolean(process.env.INCIDENT_RESPONSE_HREF);
 
+/**
+ * These gate the sitewide contact details (footer, contact page) the same
+ * way hasIncidentResponseDestination gates the incident-response CTA: show
+ * a real, working destination once configured, otherwise show nothing
+ * rather than a bracketed placeholder in a prominent, sitewide spot.
+ */
+export const hasGeneralContactEmail = Boolean(process.env.GENERAL_CONTACT_EMAIL);
+export const hasPublicPhone = Boolean(process.env.PUBLIC_PHONE);
+
 export const siteConfig = {
   name: "SilverFox",
   tagline: "Security built for the way attacks actually happen.",
