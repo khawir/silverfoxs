@@ -3,7 +3,13 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { IncidentResponseCta } from "@/components/ui/IncidentResponseCta";
 import { Section } from "@/components/ui/Section";
 import { contactContent } from "@/content/contact";
-import { hasGeneralContactEmail, hasPublicPhone, placeholders } from "@/content/site";
+import {
+  hasGeneralContactEmail,
+  hasPublicPhone,
+  hasWhatsApp,
+  placeholders,
+  whatsAppHref,
+} from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -32,28 +38,37 @@ export default async function ContactPage({
               ))}
             </div>
 
-            {(hasGeneralContactEmail || hasPublicPhone) && (
+            {(hasGeneralContactEmail || hasPublicPhone || hasWhatsApp) && (
               <div className="mt-8">
                 <p className="text-mono-label text-slate-650">Prefer to reach us directly?</p>
-                <p className="mt-3 text-body text-ink-950">
+                <div className="mt-3 flex flex-col gap-1.5 text-body text-ink-950">
                   {hasGeneralContactEmail && (
                     <a
                       href={`mailto:${placeholders.generalContactEmail}`}
-                      className="font-semibold underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare"
+                      className="w-fit font-semibold underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare"
                     >
                       {placeholders.generalContactEmail}
                     </a>
                   )}
-                  {hasGeneralContactEmail && hasPublicPhone && <br />}
                   {hasPublicPhone && (
                     <a
                       href={`tel:${placeholders.publicPhone.replace(/[^+\d]/g, "")}`}
-                      className="font-semibold underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare"
+                      className="w-fit font-semibold underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare"
                     >
                       {placeholders.publicPhone}
                     </a>
                   )}
-                </p>
+                  {hasWhatsApp && (
+                    <a
+                      href={whatsAppHref("Hi SilverFox, I'd like to get in touch.")}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-fit font-semibold underline decoration-line-light decoration-2 underline-offset-4 hover:decoration-flare"
+                    >
+                      Chat on WhatsApp
+                    </a>
+                  )}
+                </div>
               </div>
             )}
 

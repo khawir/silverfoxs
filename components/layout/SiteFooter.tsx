@@ -5,9 +5,11 @@ import {
   footerNav,
   hasGeneralContactEmail,
   hasPublicPhone,
+  hasWhatsApp,
   placeholders,
   siteConfig,
   socialLinks,
+  whatsAppHref,
 } from "@/content/site";
 
 function FooterColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
@@ -42,7 +44,7 @@ export function SiteFooter() {
             <p className="mt-6 text-footer-statement text-bone-050">{siteConfig.tagline}</p>
             <p className="mt-6 max-w-[60ch] text-body text-line-light">{siteConfig.description}</p>
 
-            {(hasGeneralContactEmail || hasPublicPhone) && (
+            {(hasGeneralContactEmail || hasPublicPhone || hasWhatsApp) && (
               <div className="mt-6 flex flex-col gap-2 text-[0.95rem]">
                 {hasGeneralContactEmail && (
                   <a
@@ -58,6 +60,16 @@ export function SiteFooter() {
                     className="w-fit text-line-light transition-colors duration-fast ease-out-crisp hover:text-bone-050"
                   >
                     {placeholders.publicPhone}
+                  </a>
+                )}
+                {hasWhatsApp && (
+                  <a
+                    href={whatsAppHref("Hi SilverFox, I'd like to get in touch.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-fit text-line-light transition-colors duration-fast ease-out-crisp hover:text-bone-050"
+                  >
+                    Chat on WhatsApp
                   </a>
                 )}
               </div>
