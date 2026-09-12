@@ -44,8 +44,8 @@ components/
   ui/                    CtaLink, Section, IncidentResponseCta
 content/                 All page copy as typed TypeScript data, transcribed
                           verbatim from docs/SILVERFOX_WEBSITE_CANONICAL.md
-lib/                     Zod schema, rate limiting, email, Turnstile
-                          verification, structured data, shared types
+lib/                     Zod schema, email, Turnstile verification, client
+                          IP helper, structured data, shared types
 ```
 
 Content is deliberately separated from presentation: to edit copy, change the
@@ -65,11 +65,18 @@ The incident-response CTA only links to a real destination once
 ## Contact form
 
 `POST /api/contact` ([`app/api/contact/route.ts`](app/api/contact/route.ts))
-validates with Zod, checks a honeypot field, applies a best-effort in-memory
-rate limit, verifies Cloudflare Turnstile (skipped with a logged warning if
-not configured) and sends via Resend (logged instead of sent if not
-configured). None of this blocks the production build or local development
-when credentials are missing - see `.env.example`.
+validates with Zod, checks a honeypot field, verifies Cloudflare Turnstile
+(skipped with a logged warning if not configured) and sends via the Zoho
+Mail SMTP account over `nodemailer` (logged instead of sent if not
+configured). The visitor's own address is only ever used as `Reply-To`; the
+message is always sent `From` the authenticated Zoho mailbox to avoid
+SPF/DKIM/DMARC failures. None of this blocks the production build or local
+development when credentials are missing - see `.env.example`.
+
+Rate limiting is deliberately not implemented in-process (see
+[`lib/client-ip.ts`](lib/client-ip.ts) for why an in-memory limiter would be
+misleading on Vercel's serverless infrastructure); protect this route with a
+Vercel Firewall/WAF rate limiting rule instead.
 
 ## Security
 

@@ -28,22 +28,32 @@ Requirements:
 - Server-side validation using Zod
 - Cloudflare Turnstile bot protection
 - Honeypot field
-- Rate limiting
+- Rate limiting at the edge (Vercel Firewall/WAF rule on `/api/contact`) -
+  not an in-process/in-memory limiter, which cannot bound abuse reliably
+  across independent serverless instances
 - Validate and sanitise submitted fields
 - Do not rely only on client-side validation
-- Send form notifications using Resend or Postmark
+- Send form notifications via the company's own Zoho Mail account over SMTP
+  (using `nodemailer`), not a third-party transactional email provider
 - Keep all API keys and secrets server-side
 - Never expose secrets using `NEXT_PUBLIC_*`
 
-Do not send email directly from the browser.
+Do not send email directly from the browser. The browser must never connect
+directly to Zoho SMTP.
 
 ## Email Architecture
 The website itself should not host company mailboxes.
 
 Assume:
-- Microsoft 365 or Google Workspace will handle business email
-- Resend or Postmark will handle website-generated email
-- SPF, DKIM and DMARC will be configured separately at DNS level
+- Zoho Mail hosts business email, including the `contact@` mailbox that both
+  receives and sends website enquiry notifications
+- Website-generated email is delivered by authenticating directly to Zoho's
+  SMTP servers (`smtp.zoho.com`) with an application-specific password, via
+  `nodemailer` - not a third-party transactional email provider
+- SPF, DKIM and DMARC are configured separately at DNS level (via Cloudflare)
+- Notifications are always sent "From" the authenticated Zoho mailbox, with
+  the visitor's submitted address set only as `Reply-To`, to avoid
+  SPF/DKIM/DMARC failures
 
 Keep the implementation compatible with this model.
 
@@ -145,7 +155,10 @@ Do not commit:
 Typical variables may include:
 
 ```text
-RESEND_API_KEY=
+ZOHO_SMTP_HOST=
+ZOHO_SMTP_PORT=
+ZOHO_SMTP_USER=
+ZOHO_SMTP_PASSWORD=
 CONTACT_EMAIL=
 TURNSTILE_SECRET_KEY=
 NEXT_PUBLIC_TURNSTILE_SITE_KEY=
