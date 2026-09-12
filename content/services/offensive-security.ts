@@ -218,7 +218,6 @@ export const offensiveSecurity: ServiceContent = {
             "Secure code review",
             "Source-code security assessment",
             "Architecture review",
-            "Threat modelling",
             "Binary analysis",
             "Firmware analysis",
             "Reverse engineering",
@@ -231,6 +230,29 @@ export const offensiveSecurity: ServiceContent = {
       ],
       footnote: [
         "This can support both enterprise software teams and organisations developing security-sensitive products.",
+      ],
+    },
+    {
+      id: "threat-modelling",
+      heading: "Threat Modelling",
+      subheading: "Find the attack paths before a single line of code is exploited.",
+      paragraphs: [
+        "SilverFox works with engineering and architecture teams to identify likely attack paths before systems are built, changed or deployed.",
+      ],
+      groups: [
+        {
+          items: [
+            "Architecture and design review",
+            "Data-flow and trust-boundary analysis",
+            "Abuse-case and misuse-case analysis",
+            "Structured threat-modelling methods, including STRIDE and attack trees",
+            "Cloud and infrastructure threat modelling",
+            "Secure-design recommendations",
+          ],
+        },
+      ],
+      footnote: [
+        "Threat modelling is most effective early, but SilverFox can apply it to existing systems as part of a wider security review.",
       ],
     },
     {

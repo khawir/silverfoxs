@@ -433,6 +433,34 @@ Capabilities include:
 
 ---
 
+## Certifications & Accreditations
+
+*Added post-launch - see "No seventh service" note below; this is a homepage credibility moment, not a new service.*
+
+Directly below the six-service capability grid, given the same kicker/headline/intro treatment as every other homepage section rather than a bare label - see "New Homepage Structure" for the shared pattern.
+
+Kinetic swap: **CLAIMED.** -> **CERTIFIED.**
+
+# Independently assessed. Formally certified.
+
+SilverFox holds and delivers audits against the standards that matter most to regulated and security-conscious organisations - because credibility should be demonstrated, not declared.
+
+Inverted to a dark surface, deliberately distinct from the sections either side of it, then a continuously drifting strip of the certifications and accreditations SilverFox holds.
+
+Rendered as bordered, accent-marked badge cards - name plus a plain-English one-line expansion of what it actually is - never as lifted certification-body logos. Real ISO/CREST/OSCP/CISSP/etc. marks do exist and displaying them is standard practice for an accredited organisation; the site has not yet been supplied the actual licensed artwork files, so text stands in until it is.
+
+Badges (name - expansion):
+
+- ISO/IEC 27001 - Information Security Management
+- ISO 9001 - Quality Management
+- SWIFT CSP - Customer Security Programme
+- CMMC - Cybersecurity Maturity Model Certification
+- OSCP - Offensive Security Certified Professional
+- CREST - Certified security testing
+- CISSP - Certified Information Systems Security Professional
+
+---
+
 ## Offensive Security Feature
 
 # A control that has never been tested is still an assumption.
@@ -913,6 +941,8 @@ We help organisations establish practical cybersecurity direction based on busin
 - Security architecture assessments
 - Cyber investment prioritisation
 - Board and executive cyber advisory
+- Strategic consulting
+- Management consulting for security functions
 
 The objective is not to produce another strategy document.
 
@@ -989,6 +1019,44 @@ SilverFox evaluates whether security controls exist, whether they are appropriat
 
 Where appropriate, assurance findings can be validated through SilverFox offensive-security testing.
 
+## Certification Audits & Assessments
+
+### Independent evidence against the frameworks your sector actually requires.
+
+SilverFox carries out internal and external audits and assessments against recognised standards, giving organisations and their stakeholders independent, credible evidence of conformance.
+
+#### ISO/IEC 27001
+
+- Internal audit
+- External audit
+
+#### ISO 9001
+
+- Internal audit
+- External audit
+
+#### SWIFT Customer Security Programme (CSP)
+
+- Internal assessment
+- External assessment
+
+#### CMMC
+
+- Readiness assessment
+- Certified assessment
+
+Each engagement is scoped to the standard's own audit cycle and evidence requirements.
+
+*Rendered as one continuous bespoke block (CertificationAuditsSection in app/services/strategy-risk-assurance/page.tsx), not the shared ContentBlockSection - the audit-framework grid needed more visual weight, and splitting it into a plain-text block plus a separately-injected diagram left a disconnected gap with the footnote stranded above an empty grid. Fixed by owning heading through footnote in one component.*
+
+#### Individual practitioner certifications include
+
+Distinct from the organisational audits above - these are certifications held by SilverFox's people, not accreditations SilverFox delivers, so they render as simpler badges with no internal/external steps.
+
+- OSCP - Offensive Security Certified Professional
+- CREST - Certified security testing
+- CISSP - Certified Information Systems Security Professional
+
 ## Our Approach
 
 ### 01. Understand
@@ -1054,6 +1122,7 @@ Cyber ranges can be used to validate security assumptions, incident-response pla
 - Regulated organisations
 - Enterprises undergoing digital transformation
 - Organisations preparing for certification or major security investment
+- Suppliers to the US defense industrial base requiring CMMC
 
 ## Closing
 
@@ -1237,7 +1306,6 @@ SilverFox supports security testing throughout the product lifecycle.
 - Secure code review
 - Source-code security assessment
 - Architecture review
-- Threat modelling
 - Binary analysis
 - Firmware analysis
 - Reverse engineering
@@ -1247,6 +1315,23 @@ SilverFox supports security testing throughout the product lifecycle.
 - Product security evaluation
 
 This can support both enterprise software teams and organisations developing security-sensitive products.
+
+## Threat Modelling
+
+### Find the attack paths before a single line of code is exploited.
+
+SilverFox works with engineering and architecture teams to identify likely attack paths before systems are built, changed or deployed.
+
+#### Capabilities
+
+- Architecture and design review
+- Data-flow and trust-boundary analysis
+- Abuse-case and misuse-case analysis
+- Structured threat-modelling methods, including STRIDE and attack trees
+- Cloud and infrastructure threat modelling
+- Secure-design recommendations
+
+Threat modelling is most effective early, but SilverFox can apply it to existing systems as part of a wider security review.
 
 ## AI Security
 
@@ -4892,6 +4977,8 @@ AI, machine learning, computer vision, edge computing, embedded systems, automat
 The launch portfolio contains exactly six services.
 
 Critical Infrastructure & OT Security is not a separate seventh service. Relevant OT, ICS and critical-infrastructure work belongs within offensive security, cloud and infrastructure security, cyber defence, incident response, RANGE, and Engineering & Applied R&D.
+
+**Post-launch update:** the client requested a named audit/certification and consulting practice (ISO/IEC 27001, ISO 9001, SWIFT CSP, CMMC, plus Strategic and Management Consulting). This was deliberately folded into the existing Cyber Strategy, Risk & Assurance service rather than added as a seventh service, since it is governance/compliance evidence work, not an attack-lifecycle stage - the six-service, six-stage narrative this rule protects stays intact. See that service's "Certification Audits & Assessments" section and expanded "Cyber Strategy & Advisory" capabilities. Threat Modelling (also requested) was promoted from a buried bullet to its own named section on the Offensive Security page, where it already belonged. A lightweight "Certifications & Accreditations" trust strip was added to the homepage separately - see the Homepage section above.
 
 ## No unverified claims
 

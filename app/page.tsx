@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Mark } from "@/components/brand/Mark";
 import { BrandStatement } from "@/components/home/BrandStatement";
 import { CapabilityGrid } from "@/components/home/CapabilityGrid";
+import { CertificationsMarquee } from "@/components/home/CertificationsMarquee";
 import { HeroIntro } from "@/components/home/HeroIntro";
 import { KineticSwap } from "@/components/home/KineticSwap";
 import { TechnologyPanel } from "@/components/home/TechnologyPanel";
@@ -87,7 +88,26 @@ export default function HomePage() {
         <CapabilityGrid services={servicesNav} />
       </Section>
 
-      {/* 04. Connected Security - the signature scroll-driven lifecycle moment */}
+      {/* 04. Certifications - a credibility moment, given the same
+          kicker/headline/intro treatment as every other homepage section
+          (docs/UPDATE.md section 15). Inverted to graphite - deliberately
+          distinct from both neighbours (Capabilities is bone, Connected
+          Security is paper) rather than blending into either. */}
+      <Section surface="graphite" spacing="standard" border="top">
+        <div className="mb-10 max-w-2xl">
+          <KineticSwap
+            from={content.certifications.kineticFrom}
+            to={content.certifications.kineticTo}
+            fromClassName="text-mono-label text-line-light line-through decoration-flare decoration-2"
+            toClassName="text-mono-label text-flare"
+          />
+          <h2 className="mt-4 text-h2 text-bone-050">{content.certifications.heading}</h2>
+          <p className="reading-measure mt-4 text-body text-line-light">{content.certifications.intro}</p>
+        </div>
+        <CertificationsMarquee items={content.certifications.items} />
+      </Section>
+
+      {/* 05. Connected Security - the signature scroll-driven lifecycle moment */}
       <Section surface="paper" spacing="tight" border="top" className="lg:motion-safe:py-0">
         <LifecycleScroll
           heading={content.attackPath.heading}
@@ -98,7 +118,7 @@ export default function HomePage() {
         />
       </Section>
 
-      {/* 05. Technology - the one other high-impact moment */}
+      {/* 06. Technology - the one other high-impact moment */}
       <Section surface="graphite" spacing="standard" border="top">
         <div className="mb-10 max-w-2xl">
           <p className="text-mono-label text-line-light">Technology</p>
@@ -108,7 +128,7 @@ export default function HomePage() {
         <TechnologyPanel products={content.technology.products} />
       </Section>
 
-      {/* 06. Engineering & R&D - moderate, a teaser only */}
+      {/* 07. Engineering & R&D - moderate, a teaser only */}
       <Section surface="paper" spacing="tight" border="top">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
           <div className="lg:max-w-xl">
@@ -121,7 +141,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 07. Brand statement - a memorable moment, not an information catalogue */}
+      {/* 08. Brand statement - a memorable moment, not an information catalogue */}
       <Section surface="bone" spacing="standard" border="top">
         <BrandStatement
           lineOne={content.brandStatement.lineOne}
@@ -130,7 +150,7 @@ export default function HomePage() {
         />
       </Section>
 
-      {/* 08. Final CTA - high impact */}
+      {/* 09. Final CTA - high impact */}
       <Section surface="ink" spacing="chapter" className="relative overflow-hidden">
         <Mark aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 text-graphite-800" />
         <div className="relative text-center">

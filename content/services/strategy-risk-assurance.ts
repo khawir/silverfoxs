@@ -77,6 +77,8 @@ export const strategyRiskAssurance: ServiceContent = {
             "Security architecture assessments",
             "Cyber investment prioritisation",
             "Board and executive cyber advisory",
+            "Strategic consulting",
+            "Management consulting for security functions",
           ],
         },
       ],
@@ -175,6 +177,25 @@ export const strategyRiskAssurance: ServiceContent = {
         "Where appropriate, assurance findings can be validated through SilverFox offensive-security testing.",
       ],
     },
+    {
+      id: "certification-audits",
+      heading: "Certification Audits & Assessments",
+      subheading: "Independent evidence against the frameworks your sector actually requires.",
+      paragraphs: [
+        "SilverFox carries out internal and external audits and assessments against recognised standards, giving organisations and their stakeholders independent, credible evidence of conformance.",
+      ],
+      // Rendered entirely through the bespoke CertificationAuditsSection in
+      // app/services/strategy-risk-assurance/page.tsx (heading, subheading,
+      // paragraphs and footnote included) rather than ContentBlockSection -
+      // this is the page's flagship new capability and needed more visual
+      // weight than the shared small-caps group heading every other bullet
+      // list on the site uses, and the audit-framework/practitioner-cert
+      // breakdown doesn't fit the plain paragraph-then-footnote shape
+      // ContentBlockSection expects. See that component for the full layout.
+      footnote: [
+        "Each engagement is scoped to the standard's own audit cycle and evidence requirements.",
+      ],
+    },
   ],
   approach: [
     {
@@ -248,6 +269,7 @@ export const strategyRiskAssurance: ServiceContent = {
     "Regulated organisations",
     "Enterprises undergoing digital transformation",
     "Organisations preparing for certification or major security investment",
+    "Suppliers to the US defense industrial base requiring CMMC",
   ],
   closing: {
     heading: "Know where you stand before deciding where to go.",
