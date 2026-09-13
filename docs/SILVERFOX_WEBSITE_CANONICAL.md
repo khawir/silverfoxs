@@ -435,17 +435,19 @@ Capabilities include:
 
 ## Certifications & Accreditations
 
-*Added post-launch - see "No seventh service" note below; this is a homepage credibility moment, not a new service.*
+*Added post-launch - see "No seventh service" note below; this is a homepage credibility moment, not a new service. Headline/intro revised 2026-09-13 on client feedback - see docs/UPDATE.md's "Section 4b" entry for the full reasoning.*
 
 Directly below the six-service capability grid, given the same kicker/headline/intro treatment as every other homepage section rather than a bare label - see "New Homepage Structure" for the shared pattern.
 
 Kinetic swap: **CLAIMED.** -> **CERTIFIED.**
 
-# Independently assessed. Formally certified.
+# We don't just hold certifications. We deliver them.
 
-SilverFox holds and delivers audits against the standards that matter most to regulated and security-conscious organisations - because credibility should be demonstrated, not declared.
+SilverFox designs and delivers the internal and external audits that take an organisation from claimed compliance to independently certified - against ISO/IEC 27001, ISO 9001, SWIFT CSP and CMMC. Every engagement is led by practitioners holding OSCP, CREST and CISSP credentials of their own.
 
-Inverted to a dark surface, deliberately distinct from the sections either side of it, then a continuously drifting strip of the certifications and accreditations SilverFox holds.
+**[Explore Certification Audits]** -> links to the Certification Audits & Assessments detail on the Strategy, Risk & Assurance service page, so a visitor gets the full internal/external audit breakdown without having to ask.
+
+Inverted to a dark surface, deliberately distinct from the sections either side of it, then a continuously drifting strip of the standards SilverFox audits organisations against and the credentials its own practitioners hold.
 
 Rendered as bordered, accent-marked badge cards - name plus a plain-English one-line expansion of what it actually is - never as lifted certification-body logos. Real ISO/CREST/OSCP/CISSP/etc. marks do exist and displaying them is standard practice for an accredited organisation; the site has not yet been supplied the actual licensed artwork files, so text stands in until it is.
 

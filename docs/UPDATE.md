@@ -297,17 +297,21 @@ Mobile should use one clean vertical column.
 
 ---
 
-## Section 4b: Certifications & Accreditations *(added post-launch)*
+## Section 4b: Certifications & Accreditations *(added post-launch, copy revised 2026-09-13)*
 
 Directly below the capability grid. Given the same kicker/headline/intro treatment as every other homepage section (Section 4's own KineticSwap -> h2 -> intro pattern) - it is a full credibility moment, not a footnote.
 
 Kinetic swap: **CLAIMED.** -> **CERTIFIED.**
 
-Headline: **Independently assessed. Formally certified.**
+Headline: **We don't just hold certifications. We deliver them.**
+
+Client feedback (2026-09-13): the original headline/intro ("Independently assessed. Formally certified." / "SilverFox holds and delivers audits against the standards that matter most...") read as SilverFox flexing its own credentials rather than offering to certify and audit the visitor's organisation - visitors kept asking about it directly instead of the site answering the question. The revised heading leads with the active service ("we deliver them"), and the intro names the standards and the internal/external audit deliverable explicitly, keeping the OSCP/CREST/CISSP practitioner credentials as a supporting clause rather than the headline claim.
 
 Inverted to a dark (graphite) surface - deliberately distinct from both neighbours (Capabilities is bone, Connected Security is paper) rather than blending into either.
 
-Below the intro, a continuously drifting strip of bordered badge cards (no logo images yet - see docs/SILVERFOX_WEBSITE_CANONICAL.md's "Certifications & Accreditations" homepage entry for why, and for the swap-in path once real badge artwork is supplied): ISO/IEC 27001, ISO 9001, SWIFT CSP, CMMC, OSCP, CREST, CISSP, each with a one-line plain-English expansion.
+Below the intro, a CTA ("Explore Certification Audits") links to the Certification Audits & Assessments detail on the Strategy, Risk & Assurance service page (`/services/strategy-risk-assurance#certification-audits`), so an interested visitor gets the full internal/external audit breakdown in one click instead of emailing to ask.
+
+Below that, a continuously drifting strip of bordered badge cards (no logo images yet - see docs/SILVERFOX_WEBSITE_CANONICAL.md's "Certifications & Accreditations" homepage entry for why, and for the swap-in path once real badge artwork is supplied): ISO/IEC 27001, ISO 9001, SWIFT CSP, CMMC, OSCP, CREST, CISSP, each with a one-line plain-English expansion.
 
 Pauses on hover/focus so it can actually be read. Falls under the sitewide reduced-motion rule like every other motion moment on the site - no separate handling needed.
 

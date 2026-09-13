@@ -92,7 +92,15 @@ export default function HomePage() {
           kicker/headline/intro treatment as every other homepage section
           (docs/UPDATE.md section 15). Inverted to graphite - deliberately
           distinct from both neighbours (Capabilities is bone, Connected
-          Security is paper) rather than blending into either. */}
+          Security is paper) rather than blending into either.
+          Client feedback (2026-09-13): the badge marquee alone read as
+          "SilverFox is credentialed" rather than "SilverFox will certify
+          and audit your organisation" - visitors weren't picking up the
+          service on a skim and kept asking about it directly instead.
+          Heading/intro now lead with the audit-delivery service, not the
+          badge collection, and a CTA sends interested visitors straight
+          to the certification-audits detail on the Strategy, Risk &
+          Assurance service page instead of making them ask. */}
       <Section surface="graphite" spacing="standard" border="top">
         <div className="mb-10 max-w-2xl">
           <KineticSwap
@@ -103,6 +111,9 @@ export default function HomePage() {
           />
           <h2 className="mt-4 text-h2 text-bone-050">{content.certifications.heading}</h2>
           <p className="reading-measure mt-4 text-body text-line-light">{content.certifications.intro}</p>
+          <CtaLink href={content.certifications.href} variant="ghost-on-dark" className="mt-6">
+            {content.certifications.cta}
+          </CtaLink>
         </div>
         <CertificationsMarquee items={content.certifications.items} />
       </Section>

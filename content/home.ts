@@ -27,9 +27,11 @@ export const homeContent = {
   certifications: {
     kineticFrom: "CLAIMED.",
     kineticTo: "CERTIFIED.",
-    heading: "Independently assessed. Formally certified.",
+    heading: "We don't just hold certifications. We deliver them.",
     intro:
-      "SilverFox holds and delivers audits against the standards that matter most to regulated and security-conscious organisations - because credibility should be demonstrated, not declared.",
+      "SilverFox designs and delivers the internal and external audits that take an organisation from claimed compliance to independently certified - against ISO/IEC 27001, ISO 9001, SWIFT CSP and CMMC. Every engagement is led by practitioners holding OSCP, CREST and CISSP credentials of their own.",
+    cta: "Explore Certification Audits",
+    href: "/services/strategy-risk-assurance#certification-audits",
     items: [
       { name: "ISO/IEC 27001", body: "Information Security Management" },
       { name: "ISO 9001", body: "Quality Management" },
